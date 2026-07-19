@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import os from "os";
 import path from "path";
 import { Resend } from "resend";
 import type { LeadInput } from "./schema";
@@ -51,16 +52,35 @@ export async function storeLead(lead: StoredLead): Promise<void> {
     return;
   }
 
-  // Dev fallback: append to a local file so no lead is ever dropped.
-  const file = path.join(process.cwd(), ".leads.local.json");
-  let existing: StoredLead[] = [];
+  // No database configured. Append to a local file as a best-effort log.
+  // On Vercel the project dir is read-only, so use the writable tmp dir there.
+  // This path must never throw: without a DB, delivery relies on notifyLead
+  // (Resend/n8n), and a filesystem hiccup must not surface an error to the
+  // prospect. If nothing at all is configured, this is the documented
+  // "unconfigured" degradation — set SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY
+  // (or RESEND/N8N) for durable, non-ephemeral capture.
   try {
-    existing = JSON.parse(await fs.readFile(file, "utf8"));
-  } catch {
-    /* first lead */
+    const dir = process.env.VERCEL ? os.tmpdir() : process.cwd();
+    const file = path.join(dir, ".leads.local.json");
+    let existing: StoredLead[] = [];
+    try {
+      existing = JSON.parse(await fs.readFile(file, "utf8"));
+    } catch {
+      /* first lead */
+    }
+    existing.push(lead);
+    await fs.writeFile(file, JSON.stringify(existing, null, 2), "utf8");
+  } catch (err) {
+    if (!process.env.RESEND_API_KEY && !process.env.N8N_WEBHOOK_URL) {
+      console.error(
+        "Lead could not be persisted and no notification channel is configured — " +
+          "set SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY (or RESEND_API_KEY / N8N_WEBHOOK_URL). Lead:",
+        JSON.stringify(lead),
+      );
+    } else {
+      console.warn("Local lead-log write failed; relying on notifyLead:", err);
+    }
   }
-  existing.push(lead);
-  await fs.writeFile(file, JSON.stringify(existing, null, 2), "utf8");
 }
 
 /** Best-effort notifications — never block or fail the lead capture. */

@@ -101,7 +101,18 @@ export default async function CaseStudyPage({
       {/* Offset readable column, per the Stitch case-study layout */}
       <div className="grid grid-cols-1 md:grid-cols-12">
         <article className="md:col-span-7 md:col-start-4">
-          <MDXRemote source={body} components={mdxComponents} />
+          {/*
+           * blockJS:false re-enables JS expressions in MDX (needed for the
+           * <ArchDiagram tiers={[...]} /> array props). Safe here because the
+           * MDX is trusted, first-party content in content/work — never user
+           * input. blockDangerousJS stays true (its default), so eval/Function/
+           * process/require remain blocked.
+           */}
+          <MDXRemote
+            source={body}
+            components={mdxComponents}
+            options={{ blockJS: false }}
+          />
         </article>
       </div>
 

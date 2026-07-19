@@ -5,6 +5,9 @@
 **/.next/
 **/out/
 
+# Vercel
+**/.vercel/
+
 # Environment / secrets
 **/.env
 **/.env.local
