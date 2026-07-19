@@ -1,0 +1,45 @@
+## The problem
+
+Most businesses' first automation is a Zap that works for three months and then silently stops. Nobody notices until a customer complains. The failure mode of cheap automation isn't that it breaks — it's that it breaks *quietly*, and by the time you find out, you've lost more than the automation ever saved. Anyone can wire up a happy path. The engineering is in what happens when the third-party API returns a 500 at 2am.
+
+## What we built
+
+A workflow automation layer that treats every job as something that can fail and must be recoverable.
+
+- **Durable job queue.** Bull on Redis. Every step is a job with a retry policy, exponential backoff, and a dead-letter queue for anything that exhausts its retries.
+- **Idempotent steps.** Re-running a job never double-charges, double-sends, or double-writes.
+- **LLM steps as first-class citizens.** Classification, extraction, and drafting steps with schema-validated output — a malformed model response is a retry, not a corrupt record downstream.
+- **Observability.** Every run has a trace: which steps ran, what they received, what they returned, how long each took. When someone asks "did the invoice go out," there's an answer, not a shrug.
+- **Alerting.** Failures that exhaust retries page a human with the full trace attached, not a generic "workflow error."
+- **Human-in-the-loop.** Any step can be marked as requiring approval — the job parks, notifies, and resumes on approval.
+
+## Architecture
+
+<ArchDiagram
+  tiers={[
+    [{ label: "Ingress", sub: "Webhooks · signature-verified" }],
+    [
+      { label: "Orchestration", sub: "n8n · third-party connectors" },
+      { label: "Durable workers", sub: "Node.js · Bull · LLM steps" },
+    ],
+    [{ label: "State", sub: "Redis queue · Postgres run traces", accent: true }],
+  ]}
+/>
+
+n8n for orchestration and third-party connectors, with a Node/Bull worker layer underneath for anything requiring durability, custom logic, or LLM calls. Redis for the queue. Postgres for run history and traces. Webhook ingress with signature verification.
+
+## Engineering decisions
+
+*Why not pure n8n / pure Zapier?* Because no-code orchestrators are excellent at connecting things and weak at retry semantics, idempotency, and observability — which is precisely where automations fail in production. Use them for what they're good at; put real code underneath the parts that matter.
+
+*Why a dead-letter queue?* Because "it failed and we lost it" is unacceptable, and "it failed and it's sitting here waiting for you" is fine.
+
+*Why schema-validate LLM output?* A model that returns prose where you expected JSON should fail loudly and retry, not write garbage into your CRM.
+
+## What it does, measured
+
+- Survives third-party API outage: jobs retry with backoff and complete when the service returns — tested by killing the downstream service mid-run
+- Duplicate webhook delivery produces exactly one side effect
+- Full trace available for every run, <B>retention period</B> retention
+
+**Adaptable for:** lead routing, document and invoice processing, client onboarding, reporting pipelines, CRM synchronization, any workflow currently held together by a person remembering to check.

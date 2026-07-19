@@ -1,0 +1,45 @@
+## The problem
+
+Multi-location businesses that hold perishable or batch-tracked stock — pharmacies, clinics, food distributors, specialty retail — almost always run on a spreadsheet per location. Nobody can see total stock across sites, nobody knows what's about to expire until it already has, and a transfer between two branches is a phone call and a hope. The cost isn't dramatic; it's a slow bleed of written-off stock and emergency reorders.
+
+## What we built
+
+A multi-location inventory system built around batches rather than SKUs — because for anyone tracking expiry, the batch *is* the unit that matters.
+
+- **Batch-level tracking.** Every unit carries its lot number, expiry date, cost, and location. Stock isn't a number; it's a set of dated batches.
+- **Expiry intelligence.** A rolling 90-day expiry horizon per location, with configurable alert thresholds. FEFO (first-expired-first-out) picking suggested by default.
+- **Cross-location visibility.** One view of every branch. Transfers are a two-click flow with a full audit trail on both sides.
+- **Movement ledger.** Every change — receipt, sale, transfer, adjustment, write-off — is an immutable, attributed row. Current stock is derived from the ledger, never edited directly. You can always answer "how did we get to this number."
+- **Reorder logic.** Per-location reorder points with lead-time awareness.
+- **Role-based access.** Branch staff see their branch. Managers see the group.
+
+## Architecture
+
+<ArchDiagram
+  tiers={[
+    [{ label: "Client", sub: "Next.js App Router · Server Components" }],
+    [
+      { label: "Reads", sub: "Materialized current-stock view" },
+      { label: "Mutations", sub: "Server Actions" },
+    ],
+    [{ label: "Data", sub: "PostgreSQL · append-only StockMovement ledger", accent: true }],
+  ]}
+/>
+
+Next.js App Router with server components for the read-heavy views; server actions for mutations. Postgres via Prisma. The core is an append-only `StockMovement` table with a materialized current-stock view refreshed on write — so the fast path stays fast without giving up the audit trail.
+
+## Engineering decisions
+
+*Why an append-only ledger instead of a mutable quantity column?* Because inventory disputes are the entire reason these systems get replaced. A mutable column can't tell you who changed what. A ledger can, forever, at effectively no cost.
+
+*Why Postgres over a document store?* Batch, location, and movement are deeply relational, and expiry reporting is a set of range queries. This is exactly the shape SQL is good at.
+
+*Why a materialized view?* Deriving current stock from the ledger on every page load is correct but slow at scale. Materializing it keeps the correctness and buys back the latency.
+
+## What it does, measured
+
+- Expiry horizon across all locations renders in <B>measure with seeded 50k-movement dataset</B>
+- Full movement history for any batch, retrievable in one query
+- Handles <B>SKU count</B> SKUs across <B>location count</B> locations in the seeded demo environment
+
+**Adaptable for:** pharmacy and clinic supply, food and beverage distribution, cosmetics, chemicals, any regulated stock with a shelf life.

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zyntrivia | Engineering &amp; AI Automation Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#581e00",
+                    "tertiary-fixed": "#ffdbcd",
+                    "tertiary-container": "#bc4800",
+                    "secondary": "#c5c7c8",
+                    "on-primary-container": "#eeefff",
+                    "secondary-fixed": "#e1e3e4",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#121316",
+                    "surface-bright": "#38393c",
+                    "inverse-surface": "#e3e2e6",
+                    "outline-variant": "#434655",
+                    "secondary-container": "#47494a",
+                    "on-secondary-container": "#b7b8ba",
+                    "primary-container": "#2563eb",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "primary-fixed": "#dbe1ff",
+                    "outline": "#8d90a0",
+                    "on-secondary-fixed": "#191c1d",
+                    "on-surface-variant": "#c3c6d7",
+                    "on-primary-fixed": "#00174b",
+                    "inverse-primary": "#0053db",
+                    "surface-tint": "#b4c5ff",
+                    "on-primary": "#002a78",
+                    "surface-container": "#1f1f23",
+                    "on-tertiary-container": "#ffede6",
+                    "on-secondary-fixed-variant": "#454748",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-surface": "#e3e2e6",
+                    "on-secondary": "#2e3132",
+                    "background": "#121316",
+                    "surface-variant": "#343538",
+                    "surface-container-highest": "#343538",
+                    "surface-container-lowest": "#0d0e11",
+                    "on-tertiary-fixed": "#360f00",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#c5c7c8",
+                    "tertiary": "#ffb596",
+                    "surface": "#121316",
+                    "surface-container-low": "#1b1b1f",
+                    "primary": "#b4c5ff",
+                    "inverse-on-surface": "#2f3034",
+                    "surface-container-high": "#292a2d",
+                    "error-container": "#93000a",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-background": "#e3e2e6",
+                    "error": "#ffb4ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "stack-md": "24px",
+                    "stack-lg": "64px",
+                    "section-padding": "80px",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Geist"],
+                    "body-md": ["Inter"],
+                    "display-xl": ["Geist"],
+                    "label-sm": ["Geist"],
+                    "headline-lg": ["Geist"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "display-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.12em", "fontWeight": "600"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #121316;
+            color: #e3e2e6;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Subtly hide scrollbars while maintaining functionality */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        
+        .axis-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #202227;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-stack-md max-w-container-max mx-auto bg-background border-b border-outline-variant">
+<div class="font-headline-lg text-[24px] font-regular text-on-surface">Zyntrivia</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-sm text-[10px] uppercase tracking-widest">
+                Request a Quote
+            </button>
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</div>
+</nav>
+<main class="pt-24 relative">
+<div class="axis-line"></div>
+<!-- Hero Section -->
+<section class="px-gutter pt-stack-lg pb-section-padding">
+<div class="flex flex-col gap-stack-md max-w-xl">
+<span class="text-primary font-label-sm uppercase tracking-[0.2em]">ENGINEERING &amp; AI AUTOMATION</span>
+<h1 class="font-display-xl text-display-xl text-on-surface">
+                    We build the software your business is running on spreadsheets.
+                </h1>
+<p class="text-on-surface-variant font-body-md max-w-md opacity-80">
+                    Custom-built internal tools, automated workflows, and AI-driven systems designed for companies that have outgrown their current stack.
+                </p>
+<div class="pt-stack-md">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-full font-label-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+                        Request a Quote
+                    </button>
+</div>
+</div>
+</section>
+<!-- Proof Row -->
+<section class="px-gutter py-stack-lg bg-surface-container-low border-y border-outline-variant">
+<div class="flex flex-col gap-stack-sm">
+<p class="font-label-sm text-outline uppercase">Trusted by industry leaders</p>
+<div class="flex flex-wrap gap-x-8 gap-y-4 opacity-40 grayscale pt-4">
+<span class="font-headline-lg text-[20px] font-bold">TECHNO</span>
+<span class="font-headline-lg text-[20px] font-bold">GLOBAL_SYS</span>
+<span class="font-headline-lg text-[20px] font-bold">ARCANE</span>
+<span class="font-headline-lg text-[20px] font-bold">VELOCITY</span>
+</div>
+</div>
+</section>
+<!-- Problem Section -->
+<section class="px-gutter py-section-padding bg-background">
+<div class="flex flex-col gap-12">
+<div class="flex flex-col gap-4">
+<span class="text-outline font-label-sm uppercase">The Bottleneck</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Growth is hard when your data lives in fragmented files.</h2>
+</div>
+<div class="grid grid-cols-1 gap-8">
+<div class="flex flex-col gap-4 p-8 bg-surface border border-outline-variant rounded-lg">
+<span class="font-display-xl text-[40px] text-outline-variant">01</span>
+<h3 class="font-headline-lg-mobile text-[24px] text-on-surface">Human Error Margin</h3>
+<p class="text-on-surface-variant font-body-md">Manual data entry costs businesses 20% of their annual revenue in lost productivity and correction time.</p>
+</div>
+<div class="flex flex-col gap-4 p-8 bg-surface border border-outline-variant rounded-lg">
+<span class="font-display-xl text-[40px] text-outline-variant">02</span>
+<h3 class="font-headline-lg-mobile text-[24px] text-on-surface">Scale Inflexibility</h3>
+<p class="text-on-surface-variant font-body-md">Spreadsheets break at scale. We build relational databases that handle millions of rows without latency.</p>
+</div>
+<div class="flex flex-col gap-4 p-8 bg-surface border border-outline-variant rounded-lg">
+<span class="font-display-xl text-[40px] text-outline-variant">03</span>
+<h3 class="font-headline-lg-mobile text-[24px] text-on-surface">Information Silos</h3>
+<p class="text-on-surface-variant font-body-md">Connect your sales, ops, and finance through a single source of truth, updated in real-time by AI.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Live Demo Input (Micro-interaction) -->
+<section class="px-gutter py-section-padding bg-surface-dim">
+<div class="max-w-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-stack-md text-on-surface">See it in action.</h2>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant">
+<label class="block font-label-sm text-outline mb-2 uppercase">Input a messy process</label>
+<div class="relative">
+<input class="w-full bg-background border border-outline-variant rounded-lg p-4 text-on-surface focus:border-primary outline-none transition-colors" placeholder="e.g. Onboarding clients via email and excel..." type="text"/>
+<button class="absolute right-2 top-2 bottom-2 bg-surface-variant px-4 rounded-md text-on-surface flex items-center">
+<span class="material-symbols-outlined">auto_awesome</span>
+</button>
+</div>
+<div class="mt-4 p-4 bg-background/50 rounded-lg border border-dashed border-outline-variant">
+<p class="text-on-surface-variant text-sm italic">"Generated architectural blueprint will appear here..."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Cost Calculator -->
+<section class="px-gutter py-section-padding bg-background">
+<div class="flex flex-col gap-stack-lg">
+<div class="flex flex-col gap-4">
+<span class="text-primary font-label-sm uppercase">ROI Calculator</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Estimate your automation savings.</h2>
+</div>
+<div class="space-y-8 bg-surface-container p-8 rounded-2xl">
+<div class="space-y-4">
+<div class="flex justify-between">
+<span class="text-on-surface font-body-md">Employees</span>
+<span class="text-primary font-bold" id="emp-val">50</span>
+</div>
+<input class="w-full accent-primary h-1 bg-outline-variant rounded-full appearance-none cursor-pointer" id="emp-slider" max="500" min="1" type="range" value="50"/>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between">
+<span class="text-on-surface font-body-md">Hours lost/week per person</span>
+<span class="text-primary font-bold" id="hrs-val">10</span>
+</div>
+<input class="w-full accent-primary h-1 bg-outline-variant rounded-full appearance-none cursor-pointer" id="hrs-slider" max="40" min="1" type="range" value="10"/>
+</div>
+<div class="pt-8 border-t border-outline-variant">
+<span class="block font-label-sm text-outline mb-2 uppercase">Annual Potential Savings</span>
+<div class="font-display-xl text-primary text-[48px]">$<span id="savings-val">1,300,000</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services List (8 Rows) -->
+<section class="px-gutter py-section-padding border-t border-outline-variant">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-12 text-on-surface">Capabilities.</h2>
+<div class="divide-y divide-outline-variant">
+<div class="py-6 flex justify-between items-center group cursor-pointer">
+<span class="font-headline-lg-mobile text-[20px] text-on-surface transition-colors group-hover:text-primary">Cloud Architecture</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">arrow_outward</span>
+</div>
+<div class="py-6 flex justify-between items-center group cursor-pointer">
+<span class="font-headline-lg-mobile text-[20px] text-on-surface transition-colors group-hover:text-primary">Custom SaaS Development</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">arrow_outward</span>
+</div>
+<div class="py-6 flex justify-between items-center group cursor-pointer">
+<span class="font-headline-lg-mobile text-[20px] text-on-surface transition-colors group-hover:text-primary">AI &amp; LLM Integration</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">arrow_outward</span>
+</div>
+<div class="py-6 flex justify-between items-center group cursor-pointer">
+<span class="font-headline-lg-mobile text-[20px] text-on-surface transition-colors group-hover:text-primary">Legacy System Migration</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">arrow_outward</span>
+</div>
+<div class="py-6 flex justify-between items-center group cursor-pointer">
+<span class="font-headline-lg-mobile text-[20px] text-on-surface transition-colors group-hover:text-primary">Process Automation (RPA)</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">arrow_outward</span>
+</div>
+<div class="py-6 flex justify-between items-center group cursor-pointer">
+<span class="font-headline-lg-mobile text-[20px] text-on-surface transition-colors group-hover:text-primary">Data Engineering &amp; Analytics</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">arrow_outward</span>
+</div>
+<div class="py-6 flex justify-between items-center group cursor-pointer">
+<span class="font-headline-lg-mobile text-[20px] text-on-surface transition-colors group-hover:text-primary">API Design &amp; Ecosystems</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">arrow_outward</span>
+</div>
+<div class="py-6 flex justify-between items-center group cursor-pointer">
+<span class="font-headline-lg-mobile text-[20px] text-on-surface transition-colors group-hover:text-primary">Technical Due Diligence</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">arrow_outward</span>
+</div>
+</div>
+</section>
+<!-- Selected Work Cards -->
+<section class="px-gutter py-section-padding bg-surface-dim">
+<div class="flex flex-col gap-12">
+<div class="flex flex-col gap-4">
+<span class="text-outline font-label-sm uppercase">Selected Work</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Architecting the future of ops.</h2>
+</div>
+<div class="flex flex-col gap-8">
+<!-- Project Card 1 -->
+<div class="group">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-lg mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A dark, cinematic visualization of a complex interconnected server network glowing with neon blue data streams. The aesthetic is ultra-minimalist and technical, with deep blacks and sharp digital precision. High-contrast lighting highlights architectural modularity and futuristic engineering. The mood is sophisticated and authoritative, reflecting premium software design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVbZDRHIzqg1l-tbORrl0buOzP80De2UgzlCo_Oma_-qrpUl_QNTIBL6h4cLVavIQGr_n1BhFEhHQtYLOfD6M8ZaeRggr4ASt1X63EaFycK8cqIeP1e5BxAjv4EUZ4cO4wUyxWG55Dlb9wxssT47fnVecBM-oR__eTnR6hV3MJIaYRr5AUU0ixeq7YyWNAg0cONujTcLE7McVc3EeLPuX4gO017tyO0flpd706fb4R__ntkfmnZz3f"/>
+</div>
+<div class="space-y-2">
+<span class="font-label-sm text-primary uppercase">FINTECH</span>
+<h3 class="font-headline-lg-mobile text-[24px] text-on-surface">Real-time Ledger Infrastructure</h3>
+<p class="text-on-surface-variant font-body-md opacity-80">Replacing a 15-year old legacy core with a high-performance Rust-based architecture.</p>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="group">
+<div class="aspect-[4/5] bg-surface-container overflow-hidden rounded-lg mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A macro close-up of a high-tech processor or circuit board with glowing crystalline structures representing artificial intelligence nodes. The color palette is strictly deep gray and electric blue. The composition is asymmetrical and architectural, conveying a sense of organized complexity. Clean lines and massive depth-of-field create a high-end, professional engineering atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTZ-GZK7Cg1rT5mFHCtwyhAUdm2vwGqLbNrYiTn7s91mX7araDiYhW_725U0dtCi8sieruSKLclilMAXbaHqj2t2Td3CEhaIKZ8kww-U_ywJ3CR4xdv9osTQIY9967VXxxtUTeNM3NDQdbrsiqebv-da08khpr9OpeE1qPJQ0YQKoP18tSD5EHpxtydPqKxyQcUuPr6QcnwA_QlmQEHUveWo8bhrCBIkA36PndAUlIXKQ75PXTPIKG"/>
+</div>
+<div class="space-y-2">
+<span class="font-label-sm text-primary uppercase">LOGISTICS</span>
+<h3 class="font-headline-lg-mobile text-[24px] text-on-surface">Predictive Route Optimization</h3>
+<p class="text-on-surface-variant font-body-md opacity-80">AI-driven engine that reduced operational fuel costs by 34% within six months.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="px-gutter py-section-padding bg-background flex flex-col items-start gap-stack-lg">
+<h2 class="font-display-xl text-display-xl text-on-surface">Ready to de-risk your operations?</h2>
+<div class="flex flex-col gap-4 w-full">
+<button class="w-full bg-primary-container text-on-primary-container py-6 rounded-lg font-headline-lg-mobile text-[20px] font-bold">
+                    Start a Project
+                </button>
+<button class="w-full bg-transparent border border-outline-variant text-on-surface py-6 rounded-lg font-headline-lg-mobile text-[20px]">
+                    View Our Process
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-gutter py-stack-lg flex flex-col gap-stack-lg max-w-container-max mx-auto bg-surface-dim border-t border-outline-variant">
+<div class="flex flex-col gap-4">
+<div class="font-headline-lg text-[24px] text-on-surface">Zyntrivia</div>
+<p class="font-label-sm text-on-tertiary-fixed-variant">Karachi (UTC+5) — overlapping EU and US Eastern</p>
+</div>
+<div class="flex flex-col gap-4">
+<a class="font-label-sm text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<p class="font-label-sm text-outline mt-4">© 2024 Zyntrivia Engineering Studio</p>
+</div>
+</footer>
+<script>
+        // Simple ROI Calculator Logic
+        const empSlider = document.getElementById('emp-slider');
+        const hrsSlider = document.getElementById('hrs-slider');
+        const empVal = document.getElementById('emp-val');
+        const hrsVal = document.getElementById('hrs-val');
+        const savingsVal = document.getElementById('savings-val');
+
+        function updateCalculator() {
+            const employees = parseInt(empSlider.value);
+            const hours = parseInt(hrsSlider.value);
+            const hourlyRate = 50; // Average cost per hour including benefits
+            const weeksPerYear = 52;
+            
+            const totalSavings = employees * hours * hourlyRate * weeksPerYear;
+            
+            empVal.innerText = employees;
+            hrsVal.innerText = hours;
+            savingsVal.innerText = totalSavings.toLocaleString();
+        }
+
+        empSlider.addEventListener('input', updateCalculator);
+        hrsSlider.addEventListener('input', updateCalculator);
+        
+        // Initial run
+        updateCalculator();
+    </script>
+</body></html>

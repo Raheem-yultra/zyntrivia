@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "zyntrivia",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "zyntrivia",
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

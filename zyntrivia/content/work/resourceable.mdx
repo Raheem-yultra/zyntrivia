@@ -1,0 +1,44 @@
+## The problem
+
+Marketplace MVPs are easy to fake and hard to ship. The demo — a grid of listings and a checkout button — takes a weekend. The actual product is everything after: onboarding third-party providers, verifying them, splitting payments, handling refunds when the provider has already been paid, and giving both sides a dashboard that tells them the truth. That's where marketplace builds die, and it's the part most agencies quietly leave for "phase two."
+
+## What we built
+
+A multi-category service marketplace with the full provider lifecycle implemented.
+
+- **Provider onboarding.** Self-serve signup → profile and service catalog → verification → live. Stripe Connect onboarding embedded in the flow, so a provider can be taking payments the same day.
+- **Multi-category taxonomy.** Categories, sub-categories, and per-category service attributes — so a new vertical is a config change, not a migration.
+- **Booking and payment.** Customer books, pays; funds are held, split at completion, and paid out to the provider net of platform fee. Refunds and disputes handled at the Connect level.
+- **Two dashboards.** Providers see bookings, earnings, and payouts. Admins see providers, transactions, disputes, and platform revenue.
+- **Search and filtering** across category, location, availability, and price.
+
+## Architecture
+
+<ArchDiagram
+  tiers={[
+    [{ label: "Client", sub: "Next.js 14 App Router" }],
+    [
+      { label: "Booking lifecycle", sub: "Webhook-driven state machine" },
+      { label: "Payments", sub: "Stripe Connect · Express accounts" },
+    ],
+    [{ label: "Data", sub: "PostgreSQL · Prisma", accent: true }],
+  ]}
+/>
+
+Next.js 14 App Router. Stripe Connect (Express accounts) for the money. Postgres/Prisma. Webhook-driven state machine for the booking lifecycle — every payment state transition is driven by a verified Stripe webhook, never by an optimistic client callback.
+
+## Engineering decisions
+
+*Why webhook-driven state, not client callbacks?* Because a customer closing the tab after paying is a normal event, and a marketplace that loses that booking is broken. Webhooks are the only source of truth the network can't drop.
+
+*Why Stripe Connect over building payouts?* Money transmission, KYC, and 1099/tax reporting are not places to be original. Connect absorbs the compliance surface entirely.
+
+*Idempotency everywhere.* Every payment-adjacent handler is keyed and replay-safe, because Stripe will deliver the same webhook twice and eventually does.
+
+## What it does, measured
+
+- Provider goes from signup to accepting payments in <B>time the flow</B>
+- Booking lifecycle survives tab-close, double-submit, and duplicate webhook delivery — all three tested
+- New service category added via config in <B>time it</B>, no schema change
+
+**Adaptable for:** home services, professional services, rentals, freelance and creator marketplaces, B2B supplier networks.

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zyntrivia — StockSense Case Study</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #121316;
+            color: #e3e2e6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .architecture-node {
+            transition: all 0.3s ease;
+        }
+        .architecture-node:hover {
+            border-color: #b4c5ff;
+            background-color: #1f1f23;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#8d90a0",
+                        "surface-dim": "#121316",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-container-lowest": "#0d0e11",
+                        "on-primary": "#002a78",
+                        "on-tertiary": "#581e00",
+                        "on-surface": "#e3e2e6",
+                        "primary-fixed": "#dbe1ff",
+                        "on-surface-variant": "#c3c6d7",
+                        "secondary-fixed": "#e1e3e4",
+                        "on-secondary-fixed": "#191c1d",
+                        "surface": "#121316",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container": "#1f1f23",
+                        "outline-variant": "#434655",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "on-background": "#e3e2e6",
+                        "surface-container-low": "#1b1b1f",
+                        "surface-container-highest": "#343538",
+                        "on-tertiary-container": "#ffede6",
+                        "on-primary-container": "#eeefff",
+                        "surface-tint": "#b4c5ff",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#b7b8ba",
+                        "primary": "#b4c5ff",
+                        "tertiary": "#ffb596",
+                        "surface-variant": "#343538",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#47494a",
+                        "inverse-surface": "#e3e2e6",
+                        "on-secondary": "#2e3132",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#454748",
+                        "surface-container-high": "#292a2d",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "background": "#121316",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#2f3034",
+                        "inverse-primary": "#0053db",
+                        "primary-container": "#2563eb",
+                        "surface-bright": "#38393c",
+                        "tertiary-container": "#bc4800",
+                        "on-tertiary-fixed": "#360f00",
+                        "secondary": "#c5c7c8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "24px",
+                        "gutter": "32px",
+                        "stack-md": "24px",
+                        "container-max": "1280px",
+                        "section-padding": "160px",
+                        "stack-sm": "8px",
+                        "stack-lg": "64px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.12em", "fontWeight": "600"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "500"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-stack-md max-w-container-max mx-auto bg-background border-b border-outline-variant">
+<div class="font-headline-lg text-[24px] font-regular text-on-surface">Zyntrivia</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-body-md text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">SERVICES</a>
+<a class="font-body-md text-label-sm uppercase tracking-widest text-primary font-bold transition-colors duration-300" href="#">WORK</a>
+<a class="font-body-md text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">PROCESS</a>
+<a class="font-body-md text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">ABOUT</a>
+<button class="ml-4 px-6 py-2 bg-primary-container text-on-primary-container rounded-sm font-label-sm uppercase tracking-widest hover:opacity-80 transition-opacity">Request a Quote</button>
+</div>
+<button class="md:hidden material-symbols-outlined text-on-surface">menu</button>
+</nav>
+<main class="pt-32 pb-section-padding px-margin-mobile md:px-gutter max-w-container-max mx-auto">
+<!-- Header Section -->
+<header class="mb-stack-lg border-l border-outline-variant pl-8 md:pl-12 py-4">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-[0.2em] mb-4 block">CASE STUDY</span>
+<h1 class="font-display-xl text-4xl md:text-display-xl max-w-4xl mb-6">Inventory that knows what's expiring, and where.</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mb-8">Reducing commercial food waste through predictive batch tracking and automated replenishment logic.</p>
+<div class="flex flex-wrap gap-3">
+<span class="px-3 py-1 bg-surface-container text-outline font-label-sm text-[10px] uppercase border border-outline-variant/30">Next.js</span>
+<span class="px-3 py-1 bg-surface-container text-outline font-label-sm text-[10px] uppercase border border-outline-variant/30">PostgreSQL</span>
+<span class="px-3 py-1 bg-surface-container text-outline font-label-sm text-[10px] uppercase border border-outline-variant/30">Prisma</span>
+</div>
+</header>
+<!-- Feature Image Placeholder -->
+<div class="w-full h-[400px] md:h-[600px] bg-surface-container mb-section-padding grayscale hover:grayscale-0 transition-all duration-700" data-alt="A cinematic, high-contrast photograph of a massive, ultra-modern industrial cold storage facility. The scene features rows of metallic shelving units stretching into the distance under cold blue LED lighting. Minimalist sensors and digital displays are visible on the crates, emitting a soft white glow. The atmosphere is clean, technical, and high-end, matching a dark-themed engineering studio aesthetic with deep shadows and sharp architectural lines." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpi_kDnSRh4xmh1WNRa2bgWEOtlOXQVHGKBgbXyQk2i2tbNcw9n7c8g4S2nNNxzmpmUBhueaq8an43WkP2-SwPm5eLodQgecBe4N83cdTpXex10HrXZyWwWiaRFCZJeSW8HbmutA8EspYbe8uz9QKSTkh0BWgSriCLobGyz0DICvWynp8Kq0-u79BT0JHN-OJ3szEfeFtPiHrwH5OgrMuYRRjyVCkeqCFcrGRCQOGjzqd0wwRU5qoi')">
+</div>
+<!-- Body Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<!-- Narrow readable column (offset) -->
+<article class="md:col-start-4 md:col-span-6 space-y-24">
+<!-- THE PROBLEM -->
+<section>
+<h2 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-6">— THE PROBLEM</h2>
+<div class="font-body-md text-on-surface-variant space-y-6">
+<p>Enterprise food distributors were losing 14% of annual revenue to inventory expiration. The existing systems relied on manual auditing, leading to "ghost stock" where items expired at the back of shelves because the software only tracked quantity, not placement or batch age.</p>
+<p>The challenge was to build a system that didn't just count items, but understood the 3D topology of a warehouse and the temporal decay of its contents.</p>
+</div>
+</section>
+<!-- WHAT WE BUILT -->
+<section>
+<h2 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-6">— WHAT WE BUILT</h2>
+<div class="font-body-md text-on-surface-variant space-y-6">
+<p>StockSense is a proactive inventory management engine. It utilizes a custom "First-Expiry-First-Out" (FEFO) routing algorithm that generates pick-lists based on shelf depth and batch expiration data.</p>
+<ul class="list-none space-y-4 border-l-2 border-primary/20 pl-6">
+<li><strong class="text-on-surface">Predictive Alerts:</strong> Automated notifications 48 hours before batch critical windows.</li>
+<li><strong class="text-on-surface">Spatial Mapping:</strong> A digital twin of the warehouse floor visualizing heatmaps of high-turnover zones.</li>
+<li><strong class="text-on-surface">Dynamic Reordering:</strong> Integration with supplier APIs to trigger restocks only when safety stock thresholds are breached.</li>
+</ul>
+</div>
+</section>
+<!-- ARCHITECTURE DIAGRAM -->
+<section class="py-12 bg-surface-container-low rounded-lg border border-outline-variant/20 p-8">
+<h2 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-12 text-center">ARCHITECTURE OVERVIEW</h2>
+<div class="relative flex flex-col items-center gap-12">
+<!-- Client Layer -->
+<div class="architecture-node w-48 py-3 px-4 border border-outline-variant text-center rounded-lg bg-surface-container-highest">
+<span class="font-label-sm text-[11px] uppercase opacity-60">Client Tier</span>
+<div class="font-body-md text-sm mt-1">Next.js Edge</div>
+</div>
+<!-- Connector -->
+<div class="w-[1px] h-8 bg-outline-variant"></div>
+<!-- API Layer -->
+<div class="grid grid-cols-2 gap-16 relative">
+<div class="architecture-node w-48 py-3 px-4 border border-outline-variant text-center rounded-lg bg-surface-container-highest">
+<span class="font-label-sm text-[11px] uppercase opacity-60">Compute</span>
+<div class="font-body-md text-sm mt-1">Prisma ORM</div>
+</div>
+<div class="architecture-node w-48 py-3 px-4 border border-outline-variant text-center rounded-lg bg-surface-container-highest">
+<span class="font-label-sm text-[11px] uppercase opacity-60">Worker</span>
+<div class="font-body-md text-sm mt-1">Expiry Cron</div>
+</div>
+<!-- Horizontal line -->
+<div class="absolute top-1/2 left-1/4 right-1/4 h-[1px] bg-outline-variant -translate-y-1/2 -z-10"></div>
+</div>
+<!-- Connector -->
+<div class="w-[1px] h-8 bg-outline-variant"></div>
+<!-- Data Layer -->
+<div class="architecture-node w-64 py-4 px-6 border border-primary/30 text-center rounded-lg bg-surface-container-highest">
+<span class="font-label-sm text-[11px] uppercase text-primary">State Persistence</span>
+<div class="font-body-md text-md mt-1">PostgreSQL Instance</div>
+</div>
+</div>
+</section>
+<!-- ENGINEERING DECISIONS -->
+<section>
+<h2 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-6">— ENGINEERING DECISIONS</h2>
+<div class="font-body-md text-on-surface-variant space-y-6">
+<p>We opted for a PostgreSQL schema utilizing recursive CTEs to handle complex warehouse hierarchies (Building &gt; Aisle &gt; Rack &gt; Bin). This allowed for rapid spatial queries without the overhead of a dedicated graph database.</p>
+<p>For the real-time dashboard, we leveraged Next.js Server Components to minimize client-side bundle size, ensuring warehouse scanners—often operating on low-bandwidth Wi-Fi—remained performant.</p>
+</div>
+</section>
+<!-- RESULTS -->
+<section>
+<h2 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-6">— RESULTS</h2>
+<div class="grid grid-cols-2 gap-8 py-8 border-t border-b border-outline-variant">
+<div>
+<div class="text-4xl font-headline-lg text-on-surface">32%</div>
+<div class="font-label-sm text-outline uppercase tracking-wider mt-2">Waste Reduction</div>
+</div>
+<div>
+<div class="text-4xl font-headline-lg text-on-surface">1.2s</div>
+<div class="font-label-sm text-outline uppercase tracking-wider mt-2">P50 Query Latency</div>
+</div>
+</div>
+</section>
+</article>
+</div>
+<!-- Final CTA -->
+<section class="mt-section-padding text-center">
+<h3 class="font-headline-lg text-on-surface mb-8">Ready to solve your engineering bottleneck?</h3>
+<button class="px-12 py-5 bg-primary-container text-on-primary-container rounded-sm font-label-sm text-lg uppercase tracking-widest hover:scale-105 active:opacity-80 transition-all duration-300">
+                Request a Quote
+            </button>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-gutter py-stack-lg flex flex-col md:flex-row justify-between items-start md:items-center max-w-container-max mx-auto bg-surface-dim border-t border-outline-variant">
+<div class="flex flex-col gap-2 mb-8 md:mb-0">
+<div class="font-headline-lg text-[20px] text-on-surface">Zyntrivia</div>
+<p class="font-label-sm text-on-tertiary-fixed-variant">© 2024 Zyntrivia Engineering Studio</p>
+</div>
+<div class="flex flex-col md:flex-row gap-6 md:gap-12">
+<span class="font-label-sm text-outline">Karachi (UTC+5) — overlapping EU and US Eastern</span>
+<a class="font-label-sm text-outline hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-outline hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+</div>
+</footer>
+<script>
+        // Subtle scroll reveal effect for text blocks
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = "0";
+            section.style.transform = "translateY(20px)";
+            section.style.transition = "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+            observer.observe(section);
+        });
+    </script>
+</body></html>

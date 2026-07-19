@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Anchored sections must clear the 72px fixed header on jump */
+section[id] {
+  scroll-margin-top: 88px;
+}
+
+body {
+  @apply bg-background text-on-surface font-body antialiased;
+}
+
+::selection {
+  @apply bg-primary text-white;
+}
+
+/* Visible focus for keyboard navigation — WCAG */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Section padding rhythm: aggressive vertical whitespace per design */
+.section-pad {
+  @apply py-section-mobile md:py-section-desktop;
+}
+
+.section-x {
+  @apply px-margin-mobile md:px-gutter;
+}
+
+/* Uppercase tracked eyebrow labels — the design's section identifiers */
+.eyebrow {
+  @apply font-display text-label-sm uppercase tracking-[0.2em];
+}
+
+/* Blue slider thumbs for the leak calculator */
+input[type="range"].slider {
+  @apply h-1 w-full cursor-pointer appearance-none rounded-full bg-outline-variant;
+}
+input[type="range"].slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 9999px;
+  background: #2563eb;
+  border: none;
+  cursor: pointer;
+}
+input[type="range"].slider::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  border-radius: 9999px;
+  background: #2563eb;
+  border: none;
+  cursor: pointer;
+}
+
+/* Kill all motion for users who ask for it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

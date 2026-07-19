@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services | Zyntrivia Engineering Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#8d90a0",
+                    "surface-dim": "#121316",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "tertiary-fixed": "#ffdbcd",
+                    "surface-container-lowest": "#0d0e11",
+                    "on-primary": "#002a78",
+                    "on-tertiary": "#581e00",
+                    "on-surface": "#e3e2e6",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface-variant": "#c3c6d7",
+                    "secondary-fixed": "#e1e3e4",
+                    "on-secondary-fixed": "#191c1d",
+                    "surface": "#121316",
+                    "on-primary-fixed": "#00174b",
+                    "surface-container": "#1f1f23",
+                    "outline-variant": "#434655",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "secondary-fixed-dim": "#c5c7c8",
+                    "on-background": "#e3e2e6",
+                    "surface-container-low": "#1b1b1f",
+                    "surface-container-highest": "#343538",
+                    "on-tertiary-container": "#ffede6",
+                    "on-primary-container": "#eeefff",
+                    "surface-tint": "#b4c5ff",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#b7b8ba",
+                    "primary": "#b4c5ff",
+                    "tertiary": "#ffb596",
+                    "surface-variant": "#343538",
+                    "error": "#ffb4ab",
+                    "secondary-container": "#47494a",
+                    "inverse-surface": "#e3e2e6",
+                    "on-secondary": "#2e3132",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454748",
+                    "surface-container-high": "#292a2d",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "background": "#121316",
+                    "error-container": "#93000a",
+                    "inverse-on-surface": "#2f3034",
+                    "inverse-primary": "#0053db",
+                    "primary-container": "#2563eb",
+                    "surface-bright": "#38393c",
+                    "tertiary-container": "#bc4800",
+                    "on-tertiary-fixed": "#360f00",
+                    "secondary": "#c5c7c8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "24px",
+                    "gutter": "32px",
+                    "stack-md": "24px",
+                    "container-max": "1280px",
+                    "section-padding": "160px",
+                    "stack-sm": "8px",
+                    "stack-lg": "64px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Geist"],
+                    "label-sm": ["Geist"],
+                    "display-xl": ["Geist"],
+                    "headline-lg": ["Geist"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.12em", "fontWeight": "600"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "500"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #121316;
+            color: #e3e2e6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .service-row:hover .service-title {
+            color: #b4c5ff;
+        }
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #b4c5ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+</head>
+<body class="font-body-md selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-outline-variant px-gutter py-stack-md max-w-container-max mx-auto flex justify-between items-center">
+<div class="font-headline-lg text-headline-lg font-regular text-on-surface dark:text-on-surface">Zyntrivia</div>
+<div class="hidden md:flex items-center gap-10">
+<div class="flex gap-8 items-center">
+<a class="font-body-md text-body-md uppercase tracking-widest text-primary dark:text-primary font-bold hover:text-primary transition-colors duration-300" href="#">SERVICES</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">WORK</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">PROCESS</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">ABOUT</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded uppercase font-bold tracking-widest text-sm hover:opacity-90 transition-all">Request a Quote</button>
+</div>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<main class="pt-40">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-gutter pb-stack-lg">
+<div class="max-w-4xl">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-[0.2em] mb-4 block">WHAT WE BUILD</span>
+<h1 class="font-display-xl text-display-xl md:text-[84px] text-on-background mb-12 leading-[1.05]">
+                    Engineering the next era of digital infrastructure.
+                </h1>
+<p class="text-on-surface-variant text-xl max-w-2xl leading-relaxed">
+                    We bridge the gap between complex engineering requirements and elegant, high-performance software. Our approach is surgical: minimal bloat, maximum efficiency.
+                </p>
+</div>
+</section>
+<!-- Services Hub (Bento-inspired List) -->
+<section class="max-w-container-max mx-auto px-gutter py-section-padding border-t border-outline-variant/30">
+<div class="grid grid-cols-1 gap-y-24">
+<!-- 01 Internal Tools -->
+<div class="service-row group grid md:grid-cols-12 gap-8 items-start border-b border-outline-variant/20 pb-16">
+<div class="md:col-span-1 font-label-sm text-label-sm text-outline">01</div>
+<div class="md:col-span-5">
+<h2 class="service-title font-headline-lg text-headline-lg mb-6 transition-colors duration-300">Internal Tools</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Admin Panels</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">CRM Customization</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Inventory Systems</span>
+</div>
+</div>
+<div class="md:col-span-6">
+<p class="text-on-surface-variant text-body-md leading-relaxed mb-8">
+                            High-velocity operational interfaces designed for complex workflows. We replace clunky spreadsheets with performant, secure dashboards that your team will actually enjoy using. Built with React and specialized data grids for massive throughput.
+                        </p>
+<div class="w-full h-1 bg-outline-variant/20 overflow-hidden">
+<div class="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+</div>
+</div>
+</div>
+<!-- 02 AI Workflow Automation -->
+<div class="service-row group grid md:grid-cols-12 gap-8 items-start border-b border-outline-variant/20 pb-16">
+<div class="md:col-span-1 font-label-sm text-label-sm text-outline">02</div>
+<div class="md:col-span-5">
+<h2 class="service-title font-headline-lg text-headline-lg mb-6 transition-colors duration-300">AI Workflow Automation</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Auto-Ops</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Content Engine</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">NLP Routers</span>
+</div>
+</div>
+<div class="md:col-span-6">
+<p class="text-on-surface-variant text-body-md leading-relaxed mb-8">
+                            Removing human bottlenecks from repetitive cognitive tasks. We orchestrate complex multi-step processes across your stack, integrating intelligence where it matters most to reduce operational overhead by up to 80%.
+                        </p>
+<div class="w-full h-1 bg-outline-variant/20 overflow-hidden">
+<div class="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+</div>
+</div>
+</div>
+<!-- 03 AI Agents & LLM Pipelines -->
+<div class="service-row group grid md:grid-cols-12 gap-8 items-start border-b border-outline-variant/20 pb-16">
+<div class="md:col-span-1 font-label-sm text-label-sm text-outline">03</div>
+<div class="md:col-span-5">
+<h2 class="service-title font-headline-lg text-headline-lg mb-6 transition-colors duration-300">AI Agents &amp; LLM Pipelines</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">RAG Architecture</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Agentic Workflows</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Fine-Tuning</span>
+</div>
+</div>
+<div class="md:col-span-6">
+<p class="text-on-surface-variant text-body-md leading-relaxed mb-8">
+                            Beyond simple prompts. We build autonomous agent systems that reason, execute tools, and maintain context across long-running sessions. Specializing in RAG (Retrieval-Augmented Generation) to make LLMs grounded in your proprietary data.
+                        </p>
+<div class="w-full h-1 bg-outline-variant/20 overflow-hidden">
+<div class="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+</div>
+</div>
+</div>
+<!-- 04 Full-Stack Web Applications -->
+<div class="service-row group grid md:grid-cols-12 gap-8 items-start border-b border-outline-variant/20 pb-16">
+<div class="md:col-span-1 font-label-sm text-label-sm text-outline">04</div>
+<div class="md:col-span-5">
+<h2 class="service-title font-headline-lg text-headline-lg mb-6 transition-colors duration-300">Full-Stack Web Applications</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">React/Next.js</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">TypeScript</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Cloud Native</span>
+</div>
+</div>
+<div class="md:col-span-6">
+<div class="w-full h-48 mb-8 rounded-lg bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A macro shot of a sleek, futuristic circuit board glowing with neon blue light pulses. The aesthetic is extremely high-end, clean, and professional, following a dark mode theme with deep charcoal and electric blue accents. Sharp focus on technical details, conveying precision and modern engineering." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9TM3hovOHlWsYZpyCiOiFUPtrueAbKyqr1Ar7YUcUxPW4nP7OaH6Q0OG2RjkDMqChwSyOvb--TkSYCDTBUAFf7KipnDbEiMgRcaeHh4FzNILBDgjA9ELEVlpNAkXQfxaVUsTOda0sulQqyvv2lcNZ7U7GoU7bC3CwsGzQXEjeCBOkHyvKhkuisYc2CR2R-olsjF7etXxkCvxnFOiEa5_Pwwdb0RLyjbG_RhM_mSXpGXopOjf8RkdR')"></div>
+<p class="text-on-surface-variant text-body-md leading-relaxed mb-8">
+                            Architecting robust, scalable web ecosystems. From high-conversion frontends to high-availability backends, we prioritize security, speed, and maintainability using the most reliable modern frameworks.
+                        </p>
+<div class="w-full h-1 bg-outline-variant/20 overflow-hidden">
+<div class="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+</div>
+</div>
+</div>
+<!-- 05 SaaS MVP Builds -->
+<div class="service-row group grid md:grid-cols-12 gap-8 items-start border-b border-outline-variant/20 pb-16">
+<div class="md:col-span-1 font-label-sm text-label-sm text-outline">05</div>
+<div class="md:col-span-5">
+<h2 class="service-title font-headline-lg text-headline-lg mb-6 transition-colors duration-300">SaaS MVP Builds</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Rapid Prototyping</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Auth &amp; Billing</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Launch Ready</span>
+</div>
+</div>
+<div class="md:col-span-6">
+<p class="text-on-surface-variant text-body-md leading-relaxed mb-8">
+                            Transforming concepts into market-ready products in weeks, not months. We focus on the core value proposition, implementing scalable architecture that grows as your user base explodes. We handle the heavy lifting of infra so you can focus on PMF.
+                        </p>
+<div class="w-full h-1 bg-outline-variant/20 overflow-hidden">
+<div class="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+</div>
+</div>
+</div>
+<!-- 06 API & System Integrations -->
+<div class="service-row group grid md:grid-cols-12 gap-8 items-start border-b border-outline-variant/20 pb-16">
+<div class="md:col-span-1 font-label-sm text-label-sm text-outline">06</div>
+<div class="md:col-span-5">
+<h2 class="service-title font-headline-lg text-headline-lg mb-6 transition-colors duration-300">API &amp; System Integrations</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Webhooks</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Microservices</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Legacy Bridging</span>
+</div>
+</div>
+<div class="md:col-span-6">
+<p class="text-on-surface-variant text-body-md leading-relaxed mb-8">
+                            We make disparate systems talk. Whether it's connecting a legacy ERP to a modern frontend or orchestrating complex third-party API networks, we ensure data flows securely and reliably across your entire enterprise architecture.
+                        </p>
+<div class="w-full h-1 bg-outline-variant/20 overflow-hidden">
+<div class="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+</div>
+</div>
+</div>
+<!-- 07 Data & Reporting Pipelines -->
+<div class="service-row group grid md:grid-cols-12 gap-8 items-start border-b border-outline-variant/20 pb-16">
+<div class="md:col-span-1 font-label-sm text-label-sm text-outline">07</div>
+<div class="md:col-span-5">
+<h2 class="service-title font-headline-lg text-headline-lg mb-6 transition-colors duration-300">Data &amp; Reporting Pipelines</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">ETL Processes</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Analytics</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Big Data</span>
+</div>
+</div>
+<div class="md:col-span-6">
+<p class="text-on-surface-variant text-body-md leading-relaxed mb-8">
+                            Unlocking insight through structured data flow. We build ETL pipelines that ingest, clean, and transform messy data into actionable intelligence, feeding real-time dashboards and predictive models.
+                        </p>
+<div class="w-full h-1 bg-outline-variant/20 overflow-hidden">
+<div class="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+</div>
+</div>
+</div>
+<!-- 08 Maintenance & Retainers -->
+<div class="service-row group grid md:grid-cols-12 gap-8 items-start pb-16">
+<div class="md:col-span-1 font-label-sm text-label-sm text-outline">08</div>
+<div class="md:col-span-5">
+<h2 class="service-title font-headline-lg text-headline-lg mb-6 transition-colors duration-300">Maintenance &amp; Retainers</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">24/7 Monitoring</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Cloud Managed</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Security Audits</span>
+</div>
+</div>
+<div class="md:col-span-6">
+<p class="text-on-surface-variant text-body-md leading-relaxed mb-8">
+                            Peace of mind as a service. Our engineering team acts as your extended CTO office, ensuring your systems are updated, patched, and optimized for performance round the clock. We don't just fix things; we prevent them from breaking.
+                        </p>
+<div class="w-full h-1 bg-outline-variant/20 overflow-hidden">
+<div class="h-full bg-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-container-max mx-auto px-gutter py-section-padding text-center">
+<div class="max-w-2xl mx-auto flex flex-col items-center">
+<h2 class="font-headline-lg text-headline-lg mb-8">Ready to engineer your advantage?</h2>
+<button class="bg-primary-container text-on-primary-container px-12 py-6 rounded uppercase font-bold tracking-widest text-lg hover:scale-105 transition-all active:opacity-80">
+                    Request a Quote
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-gutter py-stack-lg flex flex-col md:flex-row justify-between items-start md:items-center max-w-container-max mx-auto border-t border-outline-variant bg-surface-dim dark:bg-surface-dim">
+<div class="mb-8 md:mb-0">
+<div class="font-headline-lg text-headline-lg text-on-surface mb-2">Zyntrivia</div>
+<p class="text-on-tertiary-fixed-variant font-label-sm text-label-sm">© 2024 Zyntrivia Engineering Studio</p>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
+<div class="text-on-tertiary-fixed-variant font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">public</span>
+                Karachi (UTC+5) — overlapping EU and US Eastern
+            </div>
+<div class="flex gap-6">
+<a class="text-outline hover:text-primary transition-colors font-label-sm text-label-sm uppercase" href="#">Privacy Policy</a>
+<a class="text-outline hover:text-primary transition-colors font-label-sm text-label-sm uppercase" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+<!-- Atmosphere & Interaction Script -->
+<div class="custom-cursor hidden md:block"></div>
+<script>
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, .service-row').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+    </script>
+</body></html>
