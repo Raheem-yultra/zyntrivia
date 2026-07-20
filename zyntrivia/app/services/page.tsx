@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { LiveDemo } from "@/components/home/LiveDemo";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -107,9 +106,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      {/* Embedded pipeline demo */}
-      <LiveDemo />
 
       {/* CTA */}
       <section className="section-x mx-auto max-w-container py-section-mobile text-center md:py-section-desktop">

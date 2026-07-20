@@ -2,7 +2,6 @@ import { PipelineRail } from "@/components/layout/PipelineRail";
 import { Hero } from "@/components/home/Hero";
 import { ProofStrip } from "@/components/home/ProofStrip";
 import { Problem } from "@/components/home/Problem";
-import { LiveDemo } from "@/components/home/LiveDemo";
 import { LeakCalculator } from "@/components/home/LeakCalculator";
 import { ServicesRows } from "@/components/home/ServicesRows";
 import { WorkPreview } from "@/components/home/WorkPreview";
@@ -40,7 +39,6 @@ const FAQ_LD = {
 
 const RAIL_STAGES = [
   { id: "problem", label: "PROBLEM" },
-  { id: "demo", label: "PIPELINE" },
   { id: "calculator", label: "LEAK" },
   { id: "services", label: "SERVICES" },
   { id: "work", label: "WORK" },
@@ -58,7 +56,6 @@ export default function Home() {
       <Hero />
       <ProofStrip />
       <Problem />
-      <LiveDemo />
       <LeakCalculator />
       <SectionRule />
       <ServicesRows />

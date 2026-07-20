@@ -19,7 +19,6 @@ degrades gracefully:
 | Missing env | Behavior |
 |---|---|
 | `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` | Leads append to `.leads.local.json` |
-| `ANTHROPIC_API_KEY` | Pipeline demo plays the canned `REPLAY` |
 | `RESEND_API_KEY` | No emails sent (lead still stored) |
 | `UPSTASH_REDIS_REST_*` | In-memory rate limiting |
 | `N8N_WEBHOOK_URL` | Webhook skipped |
@@ -31,20 +30,13 @@ Copy `.env.example` to `.env.local` and fill in what you have. Run
 ## Structure
 
 - `app/` — routes: home, `/services`, `/work(/[slug])`, `/process`, `/about`,
-  `/quote`, `/privacy`, `/terms`, `api/quote`, `api/demo/enrich`,
-  sitemap/robots/OG image
-- `components/` — `layout/` (Nav, Footer, PipelineRail), `home/` (12 homepage
+  `/quote`, `/privacy`, `/terms`, `api/quote`, sitemap/robots/OG image
+- `components/` — `layout/` (Nav, Footer, PipelineRail), `home/` (homepage
   sections), `quote/`, `work/`, `ui/` primitives, `seo/`
 - `content/work/*.mdx` — case study bodies (plan §6 copy, verbatim)
-- `lib/` — site constants, zod schema, rate limiting, lead storage, SSRF
-  guard, demo protocol
+- `lib/` — site constants, zod schema, rate limiting, lead storage
 
-## Guardrails implemented (plan §5.1)
-
-Demo API: https-only URLs, private/loopback IP rejection with per-hop
-redirect validation, 5s fetch timeout, HTML-only, 4k content cap, 3 runs/IP/hr,
-24h URL cache, daily cost cap (`DEMO_DAILY_COST_CAP_USD`), token ceiling, and
-canned-replay fallback — the widget never shows an error to a prospect.
+## Guardrails implemented
 
 Quote API: Zod validation, honeypot, timing check (fake-success for bots),
 5/IP/hr rate limit, storage-first with fire-and-forget notifications.
@@ -53,15 +45,13 @@ Quote API: Zod validation, honeypot, timing check (fake-success for bots),
 
 1. **`[BENCHMARK]` markers** in `content/work/*.mdx` — measure real numbers
    and replace the markers. Do not invent figures (plan §6 integrity rule).
-2. **Replay recording** — `lib/demo.ts` `REPLAY` is a placeholder; replace it
-   with a recording of a real pipeline run.
-3. **Trust links** — create the GitHub org, Fiverr profile, and company
+2. **Trust links** — create the GitHub org, Fiverr profile, and company
    LinkedIn; wire the URLs in `app/about/page.tsx` (`PROOF_LINKS`) and
    `components/layout/Footer.tsx`. An unlinked claim is worse than no claim
    (plan §8) — the "Rated 5★ on Fiverr" proof-strip line in
    `components/home/ProofStrip.tsx` must stay only if the linked profile
    backs it.
-4. **Live demo deployments** — deploy the three case-study systems and add
+3. **Live demo deployments** — deploy the three case-study systems and add
    `[ Open live demo ]` buttons to the case study pages.
-5. Set `NEXT_PUBLIC_SITE_URL`, verify `hello@zyntrivia.com` exists, and
+4. Set `NEXT_PUBLIC_SITE_URL`, verify `hello@zyntrivia.com` exists, and
    review `/privacy` + `/terms` with counsel.
