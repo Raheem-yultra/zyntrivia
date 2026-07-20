@@ -10,7 +10,7 @@ export function Hero() {
             Engineering &amp; AI Automation
           </span>
           <h1 className="mb-8 font-display text-headline-md leading-[1.05] text-on-surface md:text-display-xl">
-            We build the software your business is running on spreadsheets.
+            We build software that keeps your business running smoothly.
           </h1>
           <p className="mb-10 max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl">
             Full-stack systems and AI workflows for teams who are done

@@ -36,7 +36,7 @@ export default function OgImage() {
             Zyntrivia
           </span>
           <span style={{ color: "#c3c6d7", fontSize: 30, maxWidth: 900 }}>
-            We build the software your business is running on spreadsheets.
+            We build software that keeps your business running smoothly.
           </span>
         </div>
         <div
