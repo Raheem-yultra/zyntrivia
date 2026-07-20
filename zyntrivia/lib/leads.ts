@@ -16,8 +16,14 @@ export function toStoredLead(input: LeadInput): StoredLead {
 
 /** Supabase REST insert when configured; local JSON file fallback in dev. */
 export async function storeLead(lead: StoredLead): Promise<void> {
-  const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Normalize the base URL: tolerate a trailing slash or an accidentally
+  // pasted `/rest/v1` path. Without this, such values produce a malformed
+  // request URL and PostgREST returns PGRST125 "Invalid path specified".
+  const url = process.env.SUPABASE_URL?.trim()
+    .replace(/\/+$/, "")
+    .replace(/\/rest\/v1$/, "")
+    .replace(/\/+$/, "");
 
   if (url && key) {
     const res = await fetch(`${url}/rest/v1/leads`, {
