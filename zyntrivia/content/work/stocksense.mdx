@@ -17,16 +17,16 @@ A multi-location inventory system built around batches rather than SKUs — beca
 
 <ArchDiagram
   tiers={[
-    [{ label: "Client", sub: "Next.js App Router · Server Components" }],
+    [{ label: "Client", sub: "React + Vite SPA · TanStack Query / Table" }],
     [
-      { label: "Reads", sub: "Materialized current-stock view" },
-      { label: "Mutations", sub: "Server Actions" },
+      { label: "API", sub: "Express · Drizzle · transactional writes" },
+      { label: "Reads", sub: "Stock derived on read: SUM(ledger)" },
     ],
-    [{ label: "Data", sub: "PostgreSQL · append-only StockMovement ledger", accent: true }],
+    [{ label: "Data", sub: "PostgreSQL · append-only ledger_entries", accent: true }],
   ]}
 />
 
-Next.js App Router with server components for the read-heavy views; server actions for mutations. Postgres via Prisma. The core is an append-only `StockMovement` table with a materialized current-stock view refreshed on write — so the fast path stays fast without giving up the audit trail.
+A React + Vite single-page client (TanStack Query and Table) talks to a thin Express API where every route does one thing: validate, call a single domain function, serialize. Postgres via Drizzle ORM. The core is an append-only `ledger_entries` table with *signed* quantities — current stock for any (item, location) is simply `SUM(quantity)`, computed live on every read. There is no mutable stock counter anywhere in the system, and therefore no cache that can drift out of sync with the movements that produced it.
 
 ## Engineering decisions
 
@@ -34,7 +34,7 @@ Next.js App Router with server components for the read-heavy views; server actio
 
 *Why Postgres over a document store?* Batch, location, and movement are deeply relational, and expiry reporting is a set of range queries. This is exactly the shape SQL is good at.
 
-*Why a materialized view?* Deriving current stock from the ledger on every page load is correct but slow at scale. Materializing it keeps the correctness and buys back the latency.
+*Why derive stock on read instead of storing a running total?* Because a stored total is one more thing that can silently disagree with the ledger. Computing `SUM(quantity)` on read means the number can never contradict the movements behind it — and with signed quantities and the right indexes, those sums stay fast at this scale, so correctness costs nothing. If a far larger dataset ever demanded it, precomputation is a documented next step, not a starting assumption.
 
 ## What it does, measured
 

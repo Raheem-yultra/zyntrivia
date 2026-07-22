@@ -96,6 +96,28 @@ export default async function CaseStudyPage({
             </span>
           ))}
         </div>
+
+        {/*
+         * Live demo. It is a self-contained SPA served from /public (outside
+         * Next's router), so use a plain anchor for a full navigation — a
+         * next/link client transition would look for an RSC route that isn't
+         * there. Opens in a new tab so the case study stays put.
+         */}
+        {meta.demoHref && (
+          <div className="mt-8">
+            <a
+              href={meta.demoHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-none bg-primary px-8 py-4 font-display text-label-sm uppercase tracking-[0.12em] text-white transition-all duration-150 ease-mechanical hover:brightness-110"
+            >
+              Open live demo <span aria-hidden>→</span>
+            </a>
+            <p className="mt-3 font-mono text-[11px] text-outline">
+              Runs entirely in your browser — real ledger logic, seeded data, no signup.
+            </p>
+          </div>
+        )}
       </header>
 
       {/* Offset readable column, per the Stitch case-study layout */}

@@ -5,6 +5,8 @@ export type WorkMeta = {
   headline: string;
   summary: string;
   stack: string[];
+  /** When set, the case study shows an "Open live demo" button linking here. */
+  demoHref?: string;
 };
 
 export const WORK: WorkMeta[] = [
@@ -15,7 +17,8 @@ export const WORK: WorkMeta[] = [
     headline: "Inventory that knows what's expiring, and where.",
     summary:
       "A multi-location inventory system built around batches rather than SKUs — expiry intelligence, an append-only movement ledger, and cross-branch transfers with a full audit trail.",
-    stack: ["Next.js", "PostgreSQL", "Prisma", "TypeScript"],
+    stack: ["React + Vite", "Express", "Drizzle ORM", "PostgreSQL"],
+    demoHref: "/projects/stocksense-demo",
   },
   {
     slug: "resourceable",
