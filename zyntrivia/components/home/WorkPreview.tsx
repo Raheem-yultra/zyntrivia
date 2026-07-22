@@ -29,7 +29,7 @@ export function WorkPreview() {
             </div>
             <Link
               href={`/work/${w.slug}`}
-              className="group flex items-center gap-2 font-display text-label-sm uppercase tracking-[0.12em] text-primary"
+              className="group inline-flex w-fit items-center gap-2 py-1.5 font-display text-label-sm uppercase tracking-[0.12em] text-primary"
             >
               View Case Study
               <span

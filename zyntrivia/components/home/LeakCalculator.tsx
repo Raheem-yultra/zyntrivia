@@ -125,7 +125,7 @@ export function LeakCalculator() {
                 touched.current = true;
                 setCurrency(c);
               }}
-              className={`px-4 py-2 uppercase tracking-[0.08em] transition-colors ${
+              className={`px-5 py-2.5 uppercase tracking-[0.08em] transition-colors ${
                 currency === c
                   ? "bg-primary text-white"
                   : "text-outline hover:text-on-surface"

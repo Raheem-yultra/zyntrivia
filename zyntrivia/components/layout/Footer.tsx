@@ -18,19 +18,19 @@ export function Footer() {
             href="https://github.com/zyntrivia"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-display text-label-sm uppercase tracking-[0.12em] text-outline transition-colors hover:text-primary"
+            className="font-display text-label-sm uppercase tracking-[0.12em] text-outline transition-colors hover:text-primary py-1.5 md:py-0"
           >
             GitHub
           </a>
           <Link
             href="/privacy"
-            className="font-display text-label-sm uppercase tracking-[0.12em] text-outline transition-colors hover:text-primary"
+            className="font-display text-label-sm uppercase tracking-[0.12em] text-outline transition-colors hover:text-primary py-1.5 md:py-0"
           >
             Privacy Policy
           </Link>
           <Link
             href="/terms"
-            className="font-display text-label-sm uppercase tracking-[0.12em] text-outline transition-colors hover:text-primary"
+            className="font-display text-label-sm uppercase tracking-[0.12em] text-outline transition-colors hover:text-primary py-1.5 md:py-0"
           >
             Terms of Service
           </Link>
