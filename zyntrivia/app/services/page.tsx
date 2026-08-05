@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
+import { DigitalAssetShowcase } from "@/components/services/DigitalAssetShowcase";
+
+type Service = { title: string; tags: string[]; body: string; variant?: "design" };
 
 export const metadata: Metadata = {
   title: "Services",
@@ -7,7 +10,7 @@ export const metadata: Metadata = {
     "Internal tools, AI workflow automation, LLM pipelines, full-stack applications, SaaS MVPs, integrations, data pipelines, digital asset design (icons, 3D models, illustration), and maintenance retainers.",
 };
 
-const SERVICES = [
+const SERVICES: Service[] = [
   {
     title: "Internal Tools",
     tags: ["Admin Panels", "CRM Customization", "Inventory Systems"],
@@ -47,6 +50,7 @@ const SERVICES = [
     title: "Digital Asset Design",
     tags: ["Icon Systems", "3D Models", "Illustration & Brand"],
     body: "Every visual asset your product needs, built production-ready. Custom icon systems, 3D models and product renders, illustrations, and brand graphics — delivered in the exact formats your build consumes (SVG, glTF / GLB, WebP, Lottie) and optimized so they stay crisp on any screen without bloating your load time. Design that ships in the same pipeline as the code.",
+    variant: "design",
   },
   {
     title: "Maintenance & Retainers",
@@ -76,7 +80,16 @@ export default function ServicesPage() {
       {/* Numbered service rows */}
       <section className="section-x mx-auto max-w-container border-t border-outline-variant py-section-mobile md:py-section-desktop">
         <div className="grid grid-cols-1 gap-y-16 md:gap-y-24">
-          {SERVICES.map((s, i) => (
+          {SERVICES.map((s, i) =>
+            s.variant === "design" ? (
+              <DigitalAssetShowcase
+                key={s.title}
+                index={i}
+                title={s.title}
+                tags={s.tags}
+                body={s.body}
+              />
+            ) : (
             <div
               key={s.title}
               className="group grid gap-6 border-b border-outline-variant pb-12 last:border-b-0 md:grid-cols-12 md:gap-8 md:pb-16"
