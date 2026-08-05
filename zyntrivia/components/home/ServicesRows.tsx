@@ -8,12 +8,14 @@ const SERVICES = [
   "SaaS MVP Builds",
   "API & System Integrations",
   "Data & Reporting Pipelines",
+  "Digital Asset Design",
   "Maintenance & Retainers",
 ];
 
 export function ServicesRows() {
-  const left = SERVICES.slice(0, 4);
-  const right = SERVICES.slice(4);
+  const mid = Math.ceil(SERVICES.length / 2);
+  const left = SERVICES.slice(0, mid);
+  const right = SERVICES.slice(mid);
 
   const renderCol = (items: string[], offset: number) => (
     <div className="divide-y divide-outline-variant">
@@ -47,7 +49,7 @@ export function ServicesRows() {
       <span className="eyebrow mb-stack-lg block text-outline">What We Build</span>
       <div className="grid md:grid-cols-2 md:gap-x-24">
         {renderCol(left, 0)}
-        {renderCol(right, 4)}
+        {renderCol(right, mid)}
       </div>
     </section>
   );

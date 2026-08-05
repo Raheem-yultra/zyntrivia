@@ -12,6 +12,7 @@ const SERVICES = [
   "SaaS MVP",
   "Integration between existing tools",
   "Fix or extend an existing system",
+  "Digital asset design (icons, 3D, illustration)",
   "Not sure yet",
 ];
 

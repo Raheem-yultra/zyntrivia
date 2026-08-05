@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Internal tools, AI workflow automation, LLM pipelines, full-stack applications, SaaS MVPs, integrations, data pipelines, and maintenance retainers.",
+    "Internal tools, AI workflow automation, LLM pipelines, full-stack applications, SaaS MVPs, integrations, data pipelines, digital asset design (icons, 3D models, illustration), and maintenance retainers.",
 };
 
 const SERVICES = [
@@ -42,6 +42,11 @@ const SERVICES = [
     title: "Data & Reporting Pipelines",
     tags: ["ETL Processes", "Analytics", "Dashboards"],
     body: "Structured data flow that unlocks insight. ETL pipelines that ingest, clean, and transform messy data into actionable intelligence — feeding real-time dashboards instead of a monthly spreadsheet ritual.",
+  },
+  {
+    title: "Digital Asset Design",
+    tags: ["Icon Systems", "3D Models", "Illustration & Brand"],
+    body: "Every visual asset your product needs, built production-ready. Custom icon systems, 3D models and product renders, illustrations, and brand graphics — delivered in the exact formats your build consumes (SVG, glTF / GLB, WebP, Lottie) and optimized so they stay crisp on any screen without bloating your load time. Design that ships in the same pipeline as the code.",
   },
   {
     title: "Maintenance & Retainers",

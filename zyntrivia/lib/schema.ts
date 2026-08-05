@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const leadSchema = z.object({
   source: z.enum(["quote", "calculator", "contact"]),
-  services: z.array(z.string().max(80)).max(8).optional(),
+  services: z.array(z.string().max(80)).max(9).optional(),
   problem: z.string().max(5000).optional(),
   timeline: z.string().max(80).optional(),
   companySize: z.string().max(80).optional(),
