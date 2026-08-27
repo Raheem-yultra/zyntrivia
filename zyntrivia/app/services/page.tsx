@@ -65,7 +65,7 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="section-x mx-auto max-w-container pb-stack-lg pt-16 md:pt-24">
         <div className="max-w-4xl">
-          <span className="eyebrow mb-4 block text-primary">What We Build</span>
+          <span className="eyebrow mb-4 block text-primary-text">What We Build</span>
           <h1 className="mb-10 font-display text-headline-md leading-[1.05] text-on-surface md:text-display-xl">
             Engineering the systems your business actually runs on.
           </h1>

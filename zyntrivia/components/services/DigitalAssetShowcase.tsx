@@ -87,12 +87,12 @@ export function DigitalAssetShowcase({ index, title, tags, body }: Props) {
         className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl"
       />
 
-      <div className="font-mono text-[13px] text-primary md:col-span-1">
+      <div className="font-mono text-[13px] text-primary-text md:col-span-1">
         {String(index + 1).padStart(2, "0")}
       </div>
 
       <div className="md:col-span-5">
-        <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.2em] text-primary/80">
+        <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.2em] text-primary-text/80">
           Creative &amp; Assets
         </span>
         <h2 className="mb-6 font-display text-headline-md text-primary md:text-headline-lg">
@@ -102,7 +102,7 @@ export function DigitalAssetShowcase({ index, title, tags, body }: Props) {
           {tags.map((t) => (
             <span
               key={t}
-              className="rounded-full border border-primary/40 bg-primary/[0.08] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-primary"
+              className="rounded-full border border-primary/40 bg-primary/[0.08] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-primary-text"
             >
               {t}
             </span>

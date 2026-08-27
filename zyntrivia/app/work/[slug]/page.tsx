@@ -26,7 +26,7 @@ const mdxComponents = {
   B,
   h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="mb-6 mt-20 font-mono text-[12px] uppercase tracking-[0.2em] text-primary first:mt-0"
+      className="mb-6 mt-20 font-mono text-[12px] uppercase tracking-[0.2em] text-primary-text first:mt-0"
       {...props}
     >
       <span aria-hidden>— </span>

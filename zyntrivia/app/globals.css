@@ -10,8 +10,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Anchored sections must clear the 72px fixed header on jump */
-section[id] {
+/* Any anchor target must clear the 72px fixed header on jump — not just
+   sections, since the skip link and in-page links target other elements too. */
+[id] {
   scroll-margin-top: 88px;
 }
 

@@ -12,6 +12,21 @@ export function Nav() {
   // Close the mobile menu on navigation
   useEffect(() => setOpen(false), [pathname]);
 
+  // Escape closes the mobile menu, and the body must not scroll behind it.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
     <header className="fixed top-0 z-50 w-full border-b border-outline-variant bg-background/95 backdrop-blur-sm">
       <div className="mx-auto flex h-[72px] max-w-container items-center justify-between px-margin-mobile md:px-gutter">
@@ -32,10 +47,11 @@ export function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={active ? "page" : undefined}
                 className={`font-display text-label-sm uppercase tracking-[0.12em] transition-colors duration-150 ${
                   active
-                    ? "text-primary"
-                    : "text-on-surface-variant hover:text-primary"
+                    ? "text-primary-text"
+                    : "text-on-surface-variant hover:text-primary-text"
                 }`}
               >
                 {link.label}
@@ -44,6 +60,7 @@ export function Nav() {
           })}
           <Link
             href="/quote"
+            aria-current={pathname === "/quote" ? "page" : undefined}
             className="bg-primary px-6 py-3 font-display text-label-sm uppercase tracking-[0.12em] text-white transition-all duration-150 hover:brightness-110"
           >
             Request a Quote
@@ -72,15 +89,24 @@ export function Nav() {
           aria-label="Mobile"
         >
           <div className="flex flex-col px-margin-mobile py-4">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="border-b border-outline-variant py-4 font-display text-label-sm uppercase tracking-[0.12em] text-on-surface-variant"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const active =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`border-b border-outline-variant py-4 font-display text-label-sm uppercase tracking-[0.12em] ${
+                    active ? "text-primary-text" : "text-on-surface-variant"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link
               href="/quote"
               className="mt-4 bg-primary px-6 py-4 text-center font-display text-label-sm uppercase tracking-[0.12em] text-white"

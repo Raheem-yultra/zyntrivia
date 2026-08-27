@@ -25,9 +25,9 @@ export default function PrivacyPage() {
           website, we may fetch its public pages to prepare your quote.
         </p>
         <p>
-          The live pipeline demo fetches the public URL you provide, processes
-          its public content to generate the demonstration output, and caches
-          the result briefly. Demo inputs are rate-limited per IP address.
+          The StockSense demo linked from our case studies runs entirely in your
+          browser on seeded sample data. It sends nothing to us and requires no
+          signup. Form submissions are rate-limited per IP address.
         </p>
         <p>
           Our analytics are cookieless and aggregate (Plausible). We do not
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
         <h2>Retention</h2>
         <p>
           Quote requests are kept while relevant to an active or potential
-          engagement, then deleted. Demo caches expire within 24 hours.
+          engagement, then deleted.
         </p>
       </div>
     </main>

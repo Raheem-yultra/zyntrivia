@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function WorkIndexPage() {
   return (
     <main className="section-x mx-auto max-w-container pb-section-mobile pt-16 md:pb-section-desktop md:pt-24">
-      <span className="eyebrow mb-stack-md block text-primary">Selected Work</span>
+      <span className="eyebrow mb-stack-md block text-primary-text">Selected Work</span>
       <h1 className="mb-6 max-w-4xl font-display text-headline-md text-on-surface md:text-display-xl">
         Studio-built systems, documented honestly.
       </h1>

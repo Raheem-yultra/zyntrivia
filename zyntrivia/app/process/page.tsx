@@ -41,7 +41,7 @@ const TERMS = [
 export default function ProcessPage() {
   return (
     <main className="section-x mx-auto max-w-container pb-section-mobile pt-16 md:pb-section-desktop md:pt-24">
-      <span className="eyebrow mb-4 block text-primary">How It Works</span>
+      <span className="eyebrow mb-4 block text-primary-text">How It Works</span>
       <h1 className="mb-6 max-w-4xl font-display text-headline-md leading-[1.05] text-on-surface md:text-display-xl">
         Four steps. No mystery.
       </h1>
@@ -63,7 +63,7 @@ export default function ProcessPage() {
             )}
             <span className="relative mt-2 h-[7px] w-[7px] shrink-0 rounded-full bg-primary" />
             <div>
-              <span className="mb-2 block font-mono text-[13px] tracking-[0.08em] text-primary">
+              <span className="mb-2 block font-mono text-[13px] tracking-[0.08em] text-primary-text">
                 {s.n}
               </span>
               <h2 className="mb-4 font-display text-2xl text-on-surface md:text-3xl">

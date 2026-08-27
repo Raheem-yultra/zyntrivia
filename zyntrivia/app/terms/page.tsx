@@ -19,8 +19,8 @@ export default function TermsPage() {
       <div className="max-w-measure space-y-8 text-body-md leading-relaxed text-on-surface-variant [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-xl [&_h2]:text-on-surface">
         <h2>This website</h2>
         <p>
-          The content on this site is provided for information. The pipeline
-          demo and leak calculator produce illustrative output, not
+          The content on this site is provided for information. The leak
+          calculator and the StockSense demo produce illustrative output, not
           professional advice; requesting a quote creates no obligation on
           either side.
         </p>
@@ -36,9 +36,9 @@ export default function TermsPage() {
 
         <h2>Acceptable use</h2>
         <p>
-          Don&apos;t abuse the interactive demos — automated scraping,
-          circumventing rate limits, or submitting URLs you don&apos;t have the
-          right to point us at. We may block traffic that does.
+          Don&apos;t abuse the site — automated scraping, circumventing rate
+          limits, or submitting forms you have no genuine interest in. We may
+          block traffic that does.
         </p>
 
         <h2>Liability</h2>
