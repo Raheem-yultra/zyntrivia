@@ -26,8 +26,16 @@ const config: Config = {
         "on-surface-variant": "#c3c6d7",
         outline: "#8d90a0",
         "outline-variant": "#202227",
-        "outline-dim": "#565c64",
+        // Was #565c64 — 2.75:1 on the background, below WCAG AA for the small
+        // mono labels it is used on. #7c8091 is 4.74:1 and still reads as the
+        // dimmest step in the hierarchy (outline is 5.86:1).
+        "outline-dim": "#7c8091",
         primary: "#2563eb",
+        // #2563eb is 3.59:1 on the near-black canvas: fine as a button fill
+        // (white on it is 5.17:1) and for large display text, but below AA for
+        // the 10–13px eyebrows and mono labels. This lighter step is 6.86:1
+        // and is the accent to use whenever primary is the *text* color.
+        "primary-text": "#6b9bff",
         "on-primary": "#ffffff",
         "primary-container": "#2563eb",
         "on-primary-container": "#eeefff",

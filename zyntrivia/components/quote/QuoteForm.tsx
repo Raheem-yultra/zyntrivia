@@ -30,6 +30,29 @@ const FREE_MAIL =
 const inputCls =
   "w-full border border-outline-variant bg-surface px-5 py-4 text-[15px] text-on-surface outline-none transition-colors focus:border-primary rounded-lg";
 
+/**
+ * Draft persistence. Three steps of typing is a lot to lose to an accidental
+ * refresh, a back-navigation, or a tab crash — and this is the one page on the
+ * site where losing it costs a lead. sessionStorage (not local) so the draft
+ * dies with the tab and never lingers on a shared machine.
+ */
+const DRAFT_KEY = "zyntrivia:quote-draft";
+
+type Draft = {
+  step: number;
+  services: string[];
+  problem: string;
+  timeline: string;
+  companySize: string;
+  currentState: string;
+  name: string;
+  email: string;
+  company: string;
+  country: string;
+  website: string;
+  wantsCall: boolean;
+};
+
 export function QuoteForm() {
   const [step, setStep] = useState(1);
   const [services, setServices] = useState<string[]>([]);
@@ -46,8 +69,12 @@ export function QuoteForm() {
   const [honeypot, setHoneypot] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [restored, setRestored] = useState(false);
   const startedAt = useRef(Date.now());
   const utm = useRef<Record<string, string>>({});
+  const hydrated = useRef(false);
+  const errorRef = useRef<HTMLParagraphElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     startedAt.current = Date.now();
@@ -55,7 +82,57 @@ export function QuoteForm() {
     q.forEach((v, k) => {
       if (k.startsWith("utm_")) utm.current[k] = v;
     });
+
+    // Restore an in-progress draft, if this tab has one.
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      if (raw) {
+        const d: Partial<Draft> = JSON.parse(raw);
+        if (d.services?.length) setServices(d.services);
+        if (d.problem) setProblem(d.problem);
+        if (d.timeline) setTimeline(d.timeline);
+        if (d.companySize) setCompanySize(d.companySize);
+        if (d.currentState) setCurrentState(d.currentState);
+        if (d.name) setName(d.name);
+        if (d.email) setEmail(d.email);
+        if (d.company) setCompany(d.company);
+        if (d.country) setCountry(d.country);
+        if (d.website) setWebsite(d.website);
+        if (d.wantsCall) setWantsCall(d.wantsCall);
+        if (d.step && d.step > 1 && d.step <= 3) {
+          setStep(d.step);
+          setRestored(true);
+        }
+      }
+    } catch {
+      /* private mode or corrupt draft — start clean, never block the form */
+    }
+    hydrated.current = true;
   }, []);
+
+  // Persist the draft after hydration, so the initial empty state never
+  // overwrites a stored draft on mount.
+  useEffect(() => {
+    if (!hydrated.current) return;
+    try {
+      sessionStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify({
+          step, services, problem, timeline, companySize, currentState,
+          name, email, company, country, website, wantsCall,
+        } satisfies Draft),
+      );
+    } catch {
+      /* storage full or unavailable — persistence is a nicety, not a gate */
+    }
+  }, [step, services, problem, timeline, companySize, currentState, name,
+      email, company, country, website, wantsCall]);
+
+  // Move focus to the error so it is announced and never scrolled off-screen —
+  // on step 3 the submit button sits far below the fields it validates.
+  useEffect(() => {
+    if (error) errorRef.current?.focus();
+  }, [error]);
 
   const calLink = process.env.NEXT_PUBLIC_CAL_LINK;
 
@@ -76,7 +153,10 @@ export function QuoteForm() {
       return;
     }
     setStep((s) => Math.min(3, s + 1));
+    setRestored(false);
     window.scrollTo({ top: 0 });
+    // Announce the new step to assistive tech instead of silently swapping it.
+    requestAnimationFrame(() => headingRef.current?.focus());
   }
 
   async function submit() {
@@ -123,6 +203,12 @@ export function QuoteForm() {
       }
       if (!res.ok) throw new Error("failed");
       setStatus("sent");
+      // The lead is captured — the draft has served its purpose.
+      try {
+        sessionStorage.removeItem(DRAFT_KEY);
+      } catch {
+        /* nothing to clean up */
+      }
       window.scrollTo({ top: 0 });
     } catch {
       setStatus("idle");
@@ -145,7 +231,7 @@ export function QuoteForm() {
         </p>
         <Link
           href="/process"
-          className="group flex items-center gap-2 font-display text-label-sm uppercase tracking-[0.12em] text-primary"
+          className="group flex items-center gap-2 font-display text-label-sm uppercase tracking-[0.12em] text-primary-text"
         >
           See how we scope
           <span aria-hidden className="transition-transform duration-150 group-hover:translate-x-2">
@@ -188,7 +274,10 @@ export function QuoteForm() {
     <div>
       {/* Progress indicator */}
       <div className="mb-stack-lg">
-        <span className="mb-2 block font-mono text-[12px] uppercase tracking-[0.12em] text-primary">
+        <span
+          aria-live="polite"
+          className="mb-2 block font-mono text-[12px] uppercase tracking-[0.12em] text-primary-text"
+        >
           Step {step} of 3
         </span>
         <div className="h-[2px] w-full bg-outline-variant">
@@ -199,13 +288,37 @@ export function QuoteForm() {
         </div>
       </div>
 
-      <h1 className="mb-4 font-display text-headline-md text-on-surface md:text-display-lg">
+      <h1
+        ref={headingRef}
+        tabIndex={-1}
+        className="mb-4 font-display text-headline-md text-on-surface outline-none md:text-display-lg"
+      >
         Request a quote
       </h1>
       <p className="mb-stack-lg max-w-xl text-body-md text-on-surface-variant">
         Three short steps. You&apos;ll have a fixed scope, a fixed price, and a
         ship date within 24 hours.
       </p>
+
+      {restored && (
+        <p className="mb-stack-lg border border-outline-variant bg-surface-container/50 px-5 py-4 font-mono text-[12px] text-on-surface-variant">
+          We restored your unfinished request from earlier in this tab.{" "}
+          <button
+            type="button"
+            onClick={() => {
+              try {
+                sessionStorage.removeItem(DRAFT_KEY);
+              } catch {
+                /* nothing to clear */
+              }
+              window.location.reload();
+            }}
+            className="text-primary-text underline underline-offset-4"
+          >
+            Start over
+          </button>
+        </p>
+      )}
 
       {/* Honeypot — invisible to humans */}
       <input
@@ -242,7 +355,7 @@ export function QuoteForm() {
                   <span>{s}</span>
                   <span
                     aria-hidden
-                    className={`font-mono text-[13px] ${active ? "text-primary" : "text-outline-variant"}`}
+                    className={`font-mono text-[13px] ${active ? "text-primary-text" : "text-outline-variant"}`}
                   >
                     {active ? "[x]" : "[ ]"}
                   </span>
@@ -348,7 +461,12 @@ export function QuoteForm() {
       )}
 
       {error && (
-        <p role="alert" className="mt-8 font-mono text-[13px] text-signal-alert">
+        <p
+          ref={errorRef}
+          role="alert"
+          tabIndex={-1}
+          className="mt-8 scroll-mt-28 font-mono text-[13px] text-signal-alert outline-none"
+        >
           {error}
         </p>
       )}

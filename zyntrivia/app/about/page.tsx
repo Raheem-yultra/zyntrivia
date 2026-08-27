@@ -18,7 +18,7 @@ const PROOF_LINKS = [
 export default function AboutPage() {
   return (
     <main className="section-x mx-auto max-w-container pb-section-mobile pt-16 md:pb-section-desktop md:pt-24">
-      <span className="eyebrow mb-4 block text-primary">About</span>
+      <span className="eyebrow mb-4 block text-primary-text">About</span>
       <h1 className="mb-stack-lg max-w-4xl font-display text-headline-md leading-[1.05] text-on-surface md:text-display-xl">
         Zyntrivia is an engineering studio.
       </h1>
@@ -50,7 +50,7 @@ export default function AboutPage() {
               href={l.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-outline-variant px-6 py-3 font-display text-label-sm uppercase tracking-[0.12em] text-on-surface transition-colors hover:border-primary hover:text-primary"
+              className="border border-outline-variant px-6 py-3 font-display text-label-sm uppercase tracking-[0.12em] text-on-surface transition-colors hover:border-primary hover:text-primary-text"
             >
               {l.label} ↗
             </a>
@@ -58,7 +58,7 @@ export default function AboutPage() {
             <Link
               key={l.label}
               href={l.href}
-              className="border border-outline-variant px-6 py-3 font-display text-label-sm uppercase tracking-[0.12em] text-on-surface transition-colors hover:border-primary hover:text-primary"
+              className="border border-outline-variant px-6 py-3 font-display text-label-sm uppercase tracking-[0.12em] text-on-surface transition-colors hover:border-primary hover:text-primary-text"
             >
               {l.label}
             </Link>
@@ -80,7 +80,7 @@ export default function AboutPage() {
             "Karachi, UTC+5 — full working-day overlap with Europe, 4+ hours daily overlap with US Eastern.",
           ].map((line) => (
             <li key={line} className="flex items-baseline gap-4 py-4">
-              <span aria-hidden className="font-mono text-[11px] text-primary">
+              <span aria-hidden className="font-mono text-[11px] text-primary-text">
                 —
               </span>
               {line}

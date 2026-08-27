@@ -19,17 +19,29 @@ export function PipelineRail({ stages }: { stages: RailStage[] }) {
       .filter((el): el is HTMLElement => el !== null);
     if (sections.length === 0) return;
 
-    const onScroll = () => {
+    // Coalesce to one measurement per frame: scroll fires far more often than
+    // the rail can meaningfully change, and each raw call did a layout read
+    // plus a setState on every event.
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
       const probe = window.innerHeight * 0.4;
       let current = 0;
       for (let i = 0; i < sections.length; i++) {
         if (sections[i].getBoundingClientRect().top <= probe) current = i;
       }
-      setActiveIdx(current);
+      setActiveIdx((prev) => (prev === current ? prev : current));
     };
-    onScroll();
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(measure);
+    };
+    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, [stages]);
 
   return (
@@ -43,6 +55,7 @@ export function PipelineRail({ stages }: { stages: RailStage[] }) {
           <a
             key={stage.id}
             href={`#${stage.id}`}
+            aria-current={state === "active" ? "true" : undefined}
             className="group flex items-center gap-3"
           >
             <span

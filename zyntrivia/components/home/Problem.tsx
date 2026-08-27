@@ -52,7 +52,7 @@ export function Problem() {
                   : { duration: 0.5, delay: i * 0.08, ease: [0.2, 0, 0, 1] }
               }
             />
-            <span className="mb-stack-sm block font-mono text-[12px] tracking-[0.08em] text-primary">
+            <span className="mb-stack-sm block font-mono text-[12px] tracking-[0.08em] text-primary-text">
               {p.n}
             </span>
             <h3 className="mb-stack-sm font-display text-2xl text-on-surface">

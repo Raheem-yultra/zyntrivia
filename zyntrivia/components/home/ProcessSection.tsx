@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const STEPS = [
   {
     n: "01",
@@ -38,17 +40,31 @@ export function ProcessSection() {
               )}
               <span className="relative flex items-center gap-3">
                 <span className="h-[7px] w-[7px] rounded-full bg-primary" />
-                <span className="bg-surface-dim pr-2 font-mono text-[13px] tracking-[0.08em] text-primary">
+                <span className="bg-surface-dim pr-2 font-mono text-[13px] tracking-[0.08em] text-primary-text">
                   {step.n}
                 </span>
               </span>
-              <h4 className="font-display text-xl text-on-surface">{step.title}</h4>
+              <h3 className="font-display text-xl text-on-surface">{step.title}</h3>
               <p className="text-sm leading-relaxed text-on-surface-variant">
                 {step.body}
               </p>
             </div>
           ))}
         </div>
+
+        {/* This section summarises /process; give it a way through. */}
+        <Link
+          href="/process"
+          className="group mt-stack-lg inline-flex items-center gap-2 py-1.5 font-display text-label-sm uppercase tracking-[0.12em] text-primary-text"
+        >
+          See the full process
+          <span
+            aria-hidden
+            className="transition-transform duration-150 ease-mechanical group-hover:translate-x-2"
+          >
+            →
+          </span>
+        </Link>
       </div>
     </section>
   );

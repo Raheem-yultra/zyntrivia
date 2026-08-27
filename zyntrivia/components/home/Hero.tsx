@@ -6,7 +6,7 @@ export function Hero() {
     <section id="hero" className="section-x mx-auto max-w-container pb-section-mobile pt-16 md:pb-section-desktop md:pt-24">
       <div className="grid items-center gap-16 lg:grid-cols-2">
         <div>
-          <span className="eyebrow mb-stack-md block text-primary">
+          <span className="eyebrow mb-stack-md block text-primary-text">
             Engineering &amp; AI Automation
           </span>
           <h1 className="mb-8 font-display text-headline-md leading-[1.05] text-on-surface md:text-display-xl">

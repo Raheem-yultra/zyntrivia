@@ -4,7 +4,7 @@ type Node = { label: string; sub: string; accent?: boolean };
 export function ArchDiagram({ tiers }: { tiers: Node[][] }) {
   return (
     <div className="my-12 rounded-lg border border-outline-variant bg-surface-container-low p-8 md:p-12">
-      <span className="mb-10 block text-center font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+      <span className="mb-10 block text-center font-mono text-[11px] uppercase tracking-[0.2em] text-primary-text">
         Architecture Overview
       </span>
       <div className="flex flex-col items-center">

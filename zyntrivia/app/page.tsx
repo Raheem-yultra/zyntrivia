@@ -13,18 +13,31 @@ import { FinalCTA } from "@/components/home/FinalCTA";
 import { SectionRule } from "@/components/layout/SectionRule";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { FAQ_ITEMS } from "@/lib/faq";
-import { SITE } from "@/lib/site";
+import { SITE, SERVICES } from "@/lib/site";
 
 const ORG_LD = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: SITE.name,
   url: SITE.url,
+  email: SITE.email,
   description:
-    "Engineering studio building internal tools, AI workflow automation, and full-stack applications.",
+    "Engineering studio building internal tools, AI workflow automation, full-stack applications, and digital asset design.",
   areaServed: ["US", "EU"],
   address: { "@type": "PostalAddress", addressLocality: "Karachi", addressCountry: "PK" },
   sameAs: ["https://github.com/zyntrivia"],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Services",
+    itemListElement: SERVICES.map((s) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: s.name,
+        description: s.summary,
+      },
+    })),
+  },
 };
 
 const FAQ_LD = {
