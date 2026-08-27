@@ -54,6 +54,7 @@ export function Nav() {
           type="button"
           className="flex h-10 w-10 items-center justify-center text-on-surface md:hidden"
           aria-expanded={open}
+          aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
@@ -66,6 +67,7 @@ export function Nav() {
       {/* Mobile menu */}
       {open && (
         <nav
+          id="mobile-menu"
           className="border-t border-outline-variant bg-background md:hidden"
           aria-label="Mobile"
         >

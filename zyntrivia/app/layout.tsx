@@ -38,8 +38,16 @@ export default function RootLayout({
         )}
       </head>
       <body>
+        <a
+          href="#main-content"
+          className="absolute left-4 top-4 z-[60] -translate-y-24 bg-primary px-5 py-3 font-display text-label-sm uppercase tracking-[0.12em] text-white transition-transform duration-150 focus:translate-y-0"
+        >
+          Skip to content
+        </a>
         <Nav />
-        <div className="pt-[72px]">{children}</div>
+        <div id="main-content" className="pt-[72px]">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

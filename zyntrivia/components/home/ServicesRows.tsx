@@ -1,21 +1,12 @@
 import Link from "next/link";
+import { SERVICES } from "@/lib/site";
 
-const SERVICES = [
-  "Internal Tools",
-  "AI Workflow Automation",
-  "AI Agents & LLM Pipelines",
-  "Full-Stack Web Applications",
-  "SaaS MVP Builds",
-  "API & System Integrations",
-  "Data & Reporting Pipelines",
-  "Digital Asset Design",
-  "Maintenance & Retainers",
-];
+const SERVICE_NAMES = SERVICES.map((s) => s.name);
 
 export function ServicesRows() {
-  const mid = Math.ceil(SERVICES.length / 2);
-  const left = SERVICES.slice(0, mid);
-  const right = SERVICES.slice(mid);
+  const mid = Math.ceil(SERVICE_NAMES.length / 2);
+  const left = SERVICE_NAMES.slice(0, mid);
+  const right = SERVICE_NAMES.slice(mid);
 
   const renderCol = (items: string[], offset: number) => (
     <div className="divide-y divide-outline-variant">
