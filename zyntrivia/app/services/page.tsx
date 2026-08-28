@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 import { DigitalAssetShowcase } from "@/components/services/DigitalAssetShowcase";
-
-type Service = { title: string; tags: string[]; body: string; variant?: "design" };
+import { getServices } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -10,56 +9,9 @@ export const metadata: Metadata = {
     "Internal tools, AI workflow automation, LLM pipelines, full-stack applications, SaaS MVPs, integrations, data pipelines, digital asset design (icons, 3D models, illustration), and maintenance retainers.",
 };
 
-const SERVICES: Service[] = [
-  {
-    title: "Internal Tools",
-    tags: ["Admin Panels", "CRM Customization", "Inventory Systems"],
-    body: "High-velocity operational interfaces designed for complex workflows. We replace clunky spreadsheets with performant, secure dashboards that your team will actually enjoy using — built with React and specialized data grids for serious throughput.",
-  },
-  {
-    title: "AI Workflow Automation",
-    tags: ["Auto-Ops", "Document Processing", "NLP Routers"],
-    body: "Removing human bottlenecks from repetitive cognitive tasks. We orchestrate multi-step processes across your stack — with retries, idempotency, and alerting built in — so the automation keeps working after the demo ends.",
-  },
-  {
-    title: "AI Agents & LLM Pipelines",
-    tags: ["RAG Architecture", "Agentic Workflows", "Schema-Validated Output"],
-    body: "Beyond simple prompts. We build agent systems that reason, execute tools, and maintain context across long-running sessions — grounded in your proprietary data through RAG, with every model output schema-validated before it touches your records.",
-  },
-  {
-    title: "Full-Stack Web Applications",
-    tags: ["React / Next.js", "TypeScript", "Cloud Native"],
-    body: "Robust, scalable web systems — from high-conversion frontends to high-availability backends. We prioritize security, speed, and maintainability using boring, reliable, modern frameworks.",
-  },
-  {
-    title: "SaaS MVP Builds",
-    tags: ["Rapid Prototyping", "Auth & Billing", "Launch Ready"],
-    body: "Concept to market-ready product in weeks, not months. We focus on the core value proposition and implement architecture that scales as your user base grows — auth, billing, and infrastructure handled, so you can focus on product-market fit.",
-  },
-  {
-    title: "API & System Integrations",
-    tags: ["Webhooks", "Legacy Bridging", "Third-Party APIs"],
-    body: "We make disparate systems talk. Connecting a legacy ERP to a modern frontend, or orchestrating a network of third-party APIs — data flows securely, reliably, and with an audit trail.",
-  },
-  {
-    title: "Data & Reporting Pipelines",
-    tags: ["ETL Processes", "Analytics", "Dashboards"],
-    body: "Structured data flow that unlocks insight. ETL pipelines that ingest, clean, and transform messy data into actionable intelligence — feeding real-time dashboards instead of a monthly spreadsheet ritual.",
-  },
-  {
-    title: "Digital Asset Design",
-    tags: ["Icon Systems", "3D Models", "Illustration & Brand"],
-    body: "Every visual asset your product needs, built production-ready. Custom icon systems, 3D models and product renders, illustrations, and brand graphics — delivered in the exact formats your build consumes (SVG, glTF / GLB, WebP, Lottie) and optimized so they stay crisp on any screen without bloating your load time. Design that ships in the same pipeline as the code.",
-    variant: "design",
-  },
-  {
-    title: "Maintenance & Retainers",
-    tags: ["Monitoring", "Security Patches", "Extended CTO Office"],
-    body: "Peace of mind as a service. We keep your systems updated, patched, and optimized — and we don't just fix things, we prevent them from breaking. Optional, never required: you own the code either way.",
-  },
-];
+export default async function ServicesPage() {
+  const services = await getServices();
 
-export default function ServicesPage() {
   return (
     <main>
       {/* Hero */}
@@ -80,18 +32,18 @@ export default function ServicesPage() {
       {/* Numbered service rows */}
       <section className="section-x mx-auto max-w-container border-t border-outline-variant py-section-mobile md:py-section-desktop">
         <div className="grid grid-cols-1 gap-y-16 md:gap-y-24">
-          {SERVICES.map((s, i) =>
+          {services.map((s, i) =>
             s.variant === "design" ? (
               <DigitalAssetShowcase
-                key={s.title}
+                key={s.name}
                 index={i}
-                title={s.title}
+                title={s.name}
                 tags={s.tags}
                 body={s.body}
               />
             ) : (
             <div
-              key={s.title}
+              key={s.name}
               className="group grid gap-6 border-b border-outline-variant pb-12 last:border-b-0 md:grid-cols-12 md:gap-8 md:pb-16"
             >
               <div className="font-mono text-[13px] text-outline md:col-span-1">
@@ -99,7 +51,7 @@ export default function ServicesPage() {
               </div>
               <div className="md:col-span-5">
                 <h2 className="mb-6 font-display text-headline-md text-on-surface transition-colors duration-300 group-hover:text-primary md:text-headline-lg">
-                  {s.title}
+                  {s.name}
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {s.tags.map((t) => (

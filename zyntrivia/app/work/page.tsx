@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { WORK } from "@/lib/work";
+import { getCaseStudies } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -8,7 +8,8 @@ export const metadata: Metadata = {
     "Case studies from the Zyntrivia studio — inventory systems, marketplaces, and AI automation, built in full and documented honestly.",
 };
 
-export default function WorkIndexPage() {
+export default async function WorkIndexPage() {
+  const work = await getCaseStudies();
   return (
     <main className="section-x mx-auto max-w-container pb-section-mobile pt-16 md:pb-section-desktop md:pt-24">
       <span className="eyebrow mb-stack-md block text-primary-text">Selected Work</span>
@@ -22,7 +23,7 @@ export default function WorkIndexPage() {
       </p>
 
       <div className="divide-y divide-outline-variant border-y border-outline-variant">
-        {WORK.map((w) => (
+        {work.map((w) => (
           <Link
             key={w.slug}
             href={`/work/${w.slug}`}

@@ -15,9 +15,12 @@ const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  // cdn.sanity.io: Studio-uploaded media. Everything else stays first-party.
+  "img-src 'self' data: blob: https://cdn.sanity.io",
   "font-src 'self' data:",
-  "connect-src 'self' https://plausible.io",
+  // api.sanity.io / *.api.sanity.io (incl. its wss: realtime channel): the
+  // embedded Studio at /studio talks directly to Sanity's API from the browser.
+  "connect-src 'self' https://plausible.io https://*.api.sanity.io wss://*.api.sanity.io",
   "frame-src 'self' https://cal.com https://*.cal.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
