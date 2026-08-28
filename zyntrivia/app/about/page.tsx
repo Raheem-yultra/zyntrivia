@@ -8,10 +8,8 @@ export const metadata: Metadata = {
     "Zyntrivia is an engineering studio building internal tools, AI automation, and full-stack applications. Small on purpose. Judge us on the work.",
 };
 
-// TODO(trust stack): add the Fiverr profile and company LinkedIn URLs here
-// once they exist — per the plan, an unlinked claim is worse than no claim.
 const PROOF_LINKS = [
-  { label: "GitHub", href: "https://github.com/zyntrivia", external: true },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/zyntrivia", external: true },
   { label: "Live demos", href: "/work", external: false },
 ];
 
@@ -37,8 +35,8 @@ export default function AboutPage() {
         </p>
         <p>
           We work from Karachi (UTC+5), which puts us inside the European
-          working day and across the US Eastern morning. Our code is on
-          GitHub. Our systems are deployed and clickable. Judge us on those.
+          working day and across the US Eastern morning. Our systems are
+          deployed and clickable. Judge us on those.
         </p>
       </div>
 

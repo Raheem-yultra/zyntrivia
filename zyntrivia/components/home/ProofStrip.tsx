@@ -1,5 +1,4 @@
 const CLAIMS = [
-  "Rated 5★ on Fiverr",
   "You own the code",
   "NDA on request",
   "Quotes within 24 hours",

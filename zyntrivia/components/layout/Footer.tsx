@@ -21,12 +21,12 @@ export function Footer() {
             Email
           </a>
           <a
-            href="https://github.com/zyntrivia"
+            href="https://www.linkedin.com/company/zyntrivia"
             target="_blank"
             rel="noopener noreferrer"
             className="font-display text-label-sm uppercase tracking-[0.12em] text-outline transition-colors hover:text-primary-text py-1.5 md:py-0"
           >
-            GitHub
+            LinkedIn
           </a>
           <Link
             href="/privacy"
