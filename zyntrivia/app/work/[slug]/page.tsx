@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { WORK } from "@/lib/work";
+import { PortableText } from "@portabletext/react";
+import { getCaseStudies, getCaseStudy } from "@/lib/sanity/queries";
 import { getWorkBody } from "@/lib/mdx";
 import { ArchDiagram, B } from "@/components/work/ArchDiagram";
+import { caseStudyPortableTextComponents } from "@/lib/sanity/portableTextComponents";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/site";
 
-export function generateStaticParams() {
-  return WORK.map((w) => ({ slug: w.slug }));
+export async function generateStaticParams() {
+  const work = await getCaseStudies();
+  return work.map((w) => ({ slug: w.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const meta = WORK.find((w) => w.slug === params.slug);
-  if (!meta) return {};
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const data = await getCaseStudy(params.slug);
+  if (!data) return {};
   return {
-    title: `${meta.name} Case Study`,
-    description: meta.headline,
+    title: `${data.meta.name} Case Study`,
+    description: data.meta.headline,
   };
 }
 
@@ -58,10 +61,15 @@ export default async function CaseStudyPage({
 }: {
   params: { slug: string };
 }) {
-  const meta = WORK.find((w) => w.slug === params.slug);
-  if (!meta) notFound();
-  const body = await getWorkBody(params.slug);
-  if (!body) notFound();
+  const data = await getCaseStudy(params.slug);
+  if (!data) notFound();
+  const { meta, adaptableFor } = data;
+
+  // Sanity-authored case studies carry structured Portable Text (data.body);
+  // ones not yet migrated into the CMS fall back to the original MDX file in
+  // content/work/ — see the comment on CaseStudyContent in lib/sanity/queries.ts.
+  const mdxBody = data.body ? null : await getWorkBody(params.slug);
+  if (!data.body && !mdxBody) notFound();
 
   return (
     <main className="section-x mx-auto max-w-container pb-section-mobile pt-16 md:pb-section-desktop md:pt-24">
@@ -123,18 +131,24 @@ export default async function CaseStudyPage({
       {/* Offset readable column, per the Stitch case-study layout */}
       <div className="grid grid-cols-1 md:grid-cols-12">
         <article className="md:col-span-7 md:col-start-4">
-          {/*
-           * blockJS:false re-enables JS expressions in MDX (needed for the
-           * <ArchDiagram tiers={[...]} /> array props). Safe here because the
-           * MDX is trusted, first-party content in content/work — never user
-           * input. blockDangerousJS stays true (its default), so eval/Function/
-           * process/require remain blocked.
-           */}
-          <MDXRemote
-            source={body}
-            components={mdxComponents}
-            options={{ blockJS: false }}
-          />
+          {data.body ? (
+            <PortableText value={data.body} components={caseStudyPortableTextComponents} />
+          ) : (
+            /*
+             * blockJS:false re-enables JS expressions in MDX (needed for the
+             * <ArchDiagram tiers={[...]} /> array props). Safe here because the
+             * MDX is trusted, first-party content in content/work — never user
+             * input. blockDangerousJS stays true (its default), so eval/Function/
+             * process/require remain blocked.
+             */
+            <MDXRemote source={mdxBody!} components={mdxComponents} options={{ blockJS: false }} />
+          )}
+          {adaptableFor.length > 0 && (
+            <p className="mb-6 max-w-measure text-body-md text-on-surface-variant">
+              <strong className="font-medium text-on-surface">Adaptable for:</strong>{" "}
+              {adaptableFor.join(", ")}.
+            </p>
+          )}
         </article>
       </div>
 

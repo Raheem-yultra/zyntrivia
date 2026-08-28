@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { SERVICES } from "@/lib/site";
 
-const SERVICE_NAMES = SERVICES.map((s) => s.name);
-
-export function ServicesRows() {
-  const mid = Math.ceil(SERVICE_NAMES.length / 2);
-  const left = SERVICE_NAMES.slice(0, mid);
-  const right = SERVICE_NAMES.slice(mid);
+export function ServicesRows({ services }: { services: { name: string }[] }) {
+  const names = services.map((s) => s.name);
+  const mid = Math.ceil(names.length / 2);
+  const left = names.slice(0, mid);
+  const right = names.slice(mid);
 
   const renderCol = (items: string[], offset: number) => (
     <div className="divide-y divide-outline-variant">

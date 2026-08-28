@@ -2,30 +2,14 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
-const PROBLEMS = [
-  {
-    n: "01",
-    title: "The lead that got away",
-    body: "Manual follow-ups that happen two days late. Potential revenue dissolving into an unmonitored inbox.",
-  },
-  {
-    n: "02",
-    title: "The spreadsheet nobody trusts",
-    body: 'Version "FINAL_v4_copy" is full of broken formulas and hidden tabs. Your data is an opinion, not a fact.',
-  },
-  {
-    n: "03",
-    title: "The six tools that don't talk",
-    body: "Your stack is a patchwork of Zapier loops and manual copy-pasting. One update breaks the entire chain.",
-  },
-];
+type ProblemCard = { title: string; body: string };
 
 /**
  * The only red on the page besides the calculator's implication: a red
  * hairline draws across each card's top edge on scroll-into-view,
  * staggered 80ms — the visual of money leaking.
  */
-export function Problem() {
+export function Problem({ problems }: { problems: ProblemCard[] }) {
   const reduced = useReducedMotion();
 
   return (
@@ -38,8 +22,8 @@ export function Problem() {
         </h2>
       </div>
       <div className="grid gap-12 md:grid-cols-3 md:gap-16">
-        {PROBLEMS.map((p, i) => (
-          <div key={p.n} className="relative pt-6">
+        {problems.map((p, i) => (
+          <div key={p.title} className="relative pt-6">
             <motion.span
               aria-hidden
               className="absolute left-0 top-0 h-px w-full origin-left bg-signal-alert"
@@ -53,7 +37,7 @@ export function Problem() {
               }
             />
             <span className="mb-stack-sm block font-mono text-[12px] tracking-[0.08em] text-primary-text">
-              {p.n}
+              {String(i + 1).padStart(2, "0")}
             </span>
             <h3 className="mb-stack-sm font-display text-2xl text-on-surface">
               {p.title}

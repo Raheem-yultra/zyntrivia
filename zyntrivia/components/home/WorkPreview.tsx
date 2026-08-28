@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { WORK } from "@/lib/work";
+import type { CaseStudyMeta } from "@/lib/sanity/queries";
 
-export function WorkPreview() {
+export function WorkPreview({ work }: { work: CaseStudyMeta[] }) {
   return (
     <section id="work" className="section-pad section-x mx-auto max-w-container">
       <span className="eyebrow mb-stack-lg block text-outline">Selected Work</span>
       <div className="space-y-24 md:space-y-32">
-        {WORK.map((w) => (
+        {work.map((w) => (
           <article key={w.slug} className="max-w-4xl">
             <span className="mb-4 block font-mono text-[11px] uppercase tracking-[0.08em] text-outline-dim">
               Case Study · Built by Zyntrivia · {w.category}
