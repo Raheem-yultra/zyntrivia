@@ -22,6 +22,15 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   // Each page inherits this and overrides it via its own `alternates`.
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: [{ url: "/favicon.ico" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     siteName: "Zyntrivia",
