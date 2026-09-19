@@ -1,24 +1,36 @@
 # Zyntrivia — Engineering Studio Website
 
-Marketing and lead-generation site for Zyntrivia, an engineering studio
-(internal tools · AI workflow automation · full-stack applications).
+Marketing and lead-generation site for Zyntrivia, a software studio
+(custom web apps · workflow & AI automation · internal tools · AI agents).
+
+The site is the v2 redesign. Specs live in [`docs/`](docs); start with [`CLAUDE.md`](CLAUDE.md).
 
 ## Repository layout
 
 | Path | What it is |
 |---|---|
-| [`zyntrivia/`](zyntrivia) | The website — Next.js 14 App Router · TypeScript · Tailwind · Framer Motion · MDX. See [`zyntrivia/README.md`](zyntrivia/README.md) for setup, env vars, and the pre-launch checklist. |
-| [`zyntrivia-implementation-plan_2.md`](zyntrivia-implementation-plan_2.md) | The implementation plan the site was built from. |
-| [`stitch_zyntrivia_engineering_studio_website/`](stitch_zyntrivia_engineering_studio_website) | Stitch design source — the "Neo-Minimalist Engineering" design system and per-page HTML/PNG references. |
+| [`zyntrivia/`](zyntrivia) | The website — Next.js 16 App Router · TypeScript · Payload CMS 3 · Postgres (Supabase). |
+| [`docs/`](docs) | v2 product, design, architecture and build-plan docs. `docs/reference/` holds v1 content kept for seeding. |
+| [`zyntrivia-implementation-plan_2.md`](zyntrivia-implementation-plan_2.md) | v1 implementation plan. |
+| [`stitch_zyntrivia_engineering_studio_website/`](stitch_zyntrivia_engineering_studio_website) | v1 Stitch design source. |
 
 ## Quick start
 
 ```bash
 cd zyntrivia
-npm install
-npm run dev     # http://localhost:3000
+cp .env.example .env   # set DATABASE_URL, DATABASE_CA_CERT, PAYLOAD_SECRET
+pnpm install
+pnpm migrate           # create the database schema (schema changes only go through migrations)
+pnpm seed              # optional: case studies, services, FAQs, and two posts
+pnpm dev               # http://localhost:3000 and /admin
 ```
 
-Runs with zero environment variables — every integration (Supabase, Anthropic,
-Resend, Upstash, n8n, Cal.com) degrades gracefully when unconfigured. See
-[`zyntrivia/README.md`](zyntrivia/README.md) for details.
+Use a development Supabase project, never the production database. `pnpm build` also needs a reachable database, because pages are pre-rendered from the CMS.
+
+## Docs
+
+| Doc | For |
+|---|---|
+| [`docs/EDITING-GUIDE.md`](docs/EDITING-GUIDE.md) | Publishing posts and editing content in `/admin` |
+| [`docs/CONTENT-REVIEW.md`](docs/CONTENT-REVIEW.md) | Copy and claims that need sign-off before launch |
+| [`docs/LAUNCH-CHECKLIST.md`](docs/LAUNCH-CHECKLIST.md) | Supabase, Vercel, and third-party setup for going live |

@@ -1,0 +1,402 @@
+@import 'tailwindcss';
+
+/*
+ * "Ink & Lime" tokens — docs/02-DESIGN-SYSTEM.md §2–3.
+ * Contrast is pre-verified (docs/05-COLOR-RESEARCH.md). Don't edit values without re-checking.
+ * The accent is light, so anything filled with it uses --color-on-accent for its label.
+ * A light theme can later redefine the same variables under [data-theme='light'].
+ */
+@theme {
+  --color-*: initial; /* remove Tailwind's default palette entirely */
+
+  --color-bg: #0b0c0e;
+  --color-surface-1: #141619;
+  --color-surface-2: #1c1f24;
+  --color-border-subtle: #262a30;
+  --color-border-input: #727984;
+  --color-text: #f4f5f4;
+  --color-text-muted: #b2b7bd;
+  --color-text-subtle: #959aa2;
+  --color-accent: #c6f24e;
+  --color-accent-solid: #b5e63a;
+  --color-accent-solid-hover: #a3d42b;
+  --color-on-accent: #0b0c0e; /* label on any accent fill */
+  --color-info: #7fb0ff;
+  --color-signal: #4ade9e;
+  --color-warn: #ffd166;
+  --color-danger: #ff7a86;
+  --color-focus: #c6f24e;
+  --color-transparent: transparent;
+
+  --radius-*: initial;
+  --radius-sm: 6px; /* inputs, chips */
+  --radius-md: 10px; /* buttons, small tiles */
+  --radius-lg: 18px; /* media frames, bento tiles */
+  --radius-xl: 28px; /* hero canvas frame only */
+
+  --shadow-*: initial;
+  --shadow-popover: 0 12px 32px rgb(0 0 0 / 0.6);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --breakpoint-*: initial;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1440px;
+
+  --container-content: 1200px;
+  --container-measure: 70ch;
+}
+
+/* next/font exposes hashed family names through these variables (src/lib/fonts.ts). */
+@theme inline {
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-code: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+/* Type scale — clamp() from 375px to 1440px viewports. */
+@utility type-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 1.796rem + 3.005vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+@utility type-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 1.641rem + 2.066vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+@utility type-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.486rem + 1.127vw, 2.5rem);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+@utility type-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3125rem, 1.202rem + 0.469vw, 1.625rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+@utility type-body-l {
+  font-family: var(--font-body);
+  font-size: clamp(1.125rem, 1.081rem + 0.188vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.55;
+}
+@utility type-body {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.978rem + 0.094vw, 1.0625rem);
+  font-weight: 400;
+  line-height: 1.6;
+}
+@utility type-small {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.005em;
+}
+
+/* Page gutters and section rhythm — design §4. */
+@utility page-x {
+  /*
+   * env(safe-area-inset-*) is 0 everywhere except a notched phone in landscape, where
+   * viewport-fit=cover (app layout) would otherwise run text under the sensor housing.
+   */
+  --page-gutter: 16px;
+  margin-inline: auto;
+  width: 100%;
+  max-width: calc(var(--container-content) + 2 * var(--page-gutter));
+  padding-inline: calc(var(--page-gutter) + env(safe-area-inset-left))
+    calc(var(--page-gutter) + env(safe-area-inset-right));
+  @media (width >= 640px) {
+    --page-gutter: 24px;
+  }
+}
+@utility section-y {
+  padding-block: 64px;
+  @media (width >= 900px) {
+    padding-block: 96px;
+  }
+}
+
+/* The one permitted gradient (design §2): a ≤10% accent wash behind the hero canvas. */
+@utility hero-wash {
+  background-image: radial-gradient(
+    60% 55% at 62% 42%,
+    color-mix(in srgb, var(--color-accent) 10%, transparent),
+    transparent 72%
+  );
+}
+
+@keyframes flow-idle {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-signal) 45%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-signal) 0%, transparent);
+  }
+}
+
+@utility animate-flow-idle {
+  animation: flow-idle 2.4s var(--ease-in-out) infinite;
+}
+
+/* 6px pulse travelling along a connector (path has pathLength="1"). */
+@keyframes flow-pulse {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -1;
+  }
+}
+
+@utility animate-flow-pulse {
+  animation: flow-pulse 0.8s var(--ease-in-out) both;
+}
+
+/*
+ * Route-change loading UI (src/components/ui/Skeleton.tsx). Motion here answers a user
+ * action — navigating — which design §6 allows; the reduced-motion rule below freezes it.
+ */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@utility animate-skeleton {
+  animation: skeleton-pulse 1.6s var(--ease-in-out) infinite;
+}
+
+/* Indeterminate bar: no real progress to report, so it sweeps instead of filling. */
+@keyframes route-progress {
+  0% {
+    transform: translateX(-100%) scaleX(0.4);
+  }
+  50% {
+    transform: translateX(10%) scaleX(0.7);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.4);
+  }
+}
+
+@utility animate-route-progress {
+  transform-origin: left center;
+  animation: route-progress 1.2s var(--ease-in-out) infinite;
+  /*
+   * The global reduced-motion rule cuts the animation to one 0.01ms run with no fill, so the
+   * bar reverts to this base transform instead of resting off-screen at its 100% keyframe.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    transform: scaleX(0.4);
+  }
+}
+
+/* Scroll-linked progress for the process timeline only (design §6c). */
+@keyframes timeline-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@utility timeline-progress {
+  transform-origin: left center;
+  @supports (animation-timeline: view()) {
+    animation: timeline-fill linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 55%;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-text);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-bg);
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 0.978rem + 0.094vw, 1.0625rem);
+    line-height: 1.6;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* Keeps the footer reachable above the homepage's sticky mobile CTA. */
+  @media (width < 900px) {
+    body:has([data-sticky-cta]) {
+      padding-bottom: calc(72px + env(safe-area-inset-bottom));
+    }
+  }
+
+  /*
+   * Homepage sections below the hero skip style, layout, and paint until they near the
+   * viewport, which keeps that work out of the load's long tasks. `auto` remembers each
+   * section's real height once it has rendered, so the scrollbar settles quickly.
+   */
+  main > [data-section]:not([data-section='hero']) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    color: var(--color-text);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Blog typography — design §7 "Prose". */
+@layer components {
+  /* Syntax highlighting (src/lib/highlight.ts) mapped onto tokens. */
+  .code-block {
+    --shiki-foreground: var(--color-text);
+    --shiki-background: var(--color-surface-1);
+    --shiki-token-constant: var(--color-info);
+    --shiki-token-string: var(--color-signal);
+    --shiki-token-string-expression: var(--color-signal);
+    --shiki-token-comment: var(--color-text-subtle);
+    --shiki-token-keyword: var(--color-accent);
+    --shiki-token-parameter: var(--color-warn);
+    --shiki-token-function: var(--color-info);
+    --shiki-token-punctuation: var(--color-text-muted);
+    --shiki-token-link: var(--color-info);
+  }
+  .code-block pre {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    background: transparent !important;
+    tab-size: 2;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .prose {
+    max-width: var(--container-measure);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+  .prose > * + * {
+    margin-top: 1.25em;
+  }
+  .prose :where(h2, h3) {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    scroll-margin-top: 96px;
+  }
+  .prose h2 {
+    margin-top: 56px;
+    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
+    font-weight: 650;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .prose h3 {
+    margin-top: 40px;
+    font-size: 1.3125rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .prose :where(h2, h3) + * {
+    margin-top: 0.75em;
+  }
+  .prose strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .prose a {
+    color: var(--color-info);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+  .prose a:hover {
+    text-decoration-thickness: 2px;
+  }
+  .prose :where(ul, ol) {
+    padding-left: 1.25em;
+  }
+  .prose ul {
+    list-style: disc;
+  }
+  .prose ol {
+    list-style: decimal;
+  }
+  .prose li + li {
+    margin-top: 0.4em;
+  }
+  .prose li::marker {
+    color: var(--color-text-subtle);
+  }
+  .prose blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.25em;
+    color: var(--color-text);
+  }
+  .prose :not(pre) > code {
+    font-family: var(--font-code);
+    font-size: 0.875em;
+    background: var(--color-surface-2);
+    border-radius: var(--radius-sm);
+    padding: 0.15em 0.4em;
+    color: var(--color-text);
+  }
+  .prose hr {
+    border: 0;
+    border-top: 1px solid var(--color-border-subtle);
+    margin-block: 3em;
+  }
+}
