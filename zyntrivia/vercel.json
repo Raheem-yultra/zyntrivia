@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "pnpm run build:deploy",
+  "crons": [
+    {
+      "path": "/api/payload-jobs/run?allQueues=true",
+      "schedule": "30 3 * * *"
+    }
+  ]
+}

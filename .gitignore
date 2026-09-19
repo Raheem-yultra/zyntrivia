@@ -21,3 +21,7 @@
 # OS
 .DS_Store
 Thumbs.db
+
+# Original v2 spec delivery; the working copies live in docs/
+/zyntrivia-redesign-docs/
+/zyntrivia-redesign-docs.zip
