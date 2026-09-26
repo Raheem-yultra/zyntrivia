@@ -5,7 +5,7 @@ import { PageLoading, type LoadingVariant } from '@/components/sections/PageLoad
 
 export const metadata: Metadata = { title: 'Loading states', robots: { index: false } }
 
-const VARIANTS: LoadingVariant[] = ['page', 'index', 'article', 'form']
+const VARIANTS: LoadingVariant[] = ['brand', 'page', 'index', 'article', 'form']
 
 function isVariant(value: string | undefined): value is LoadingVariant {
   return VARIANTS.includes(value as LoadingVariant)
@@ -18,8 +18,9 @@ type Props = {
 /**
  * Dev-only preview of the route-level loading UI. 404 in production.
  *
- * `?variant=page|index|article|form` renders one skeleton directly; `?delay=4000` holds the
- * page instead, which exercises the real Suspense fallback from `(frontend)/loading.tsx`.
+ * `?variant=brand|page|index|article|form` renders one loading state directly; `?delay=4000`
+ * holds the page instead, which exercises the real Suspense fallback from
+ * `(frontend)/loading.tsx` (the branded loader).
  */
 export default async function LoadingStatesPage({ searchParams }: Props) {
   if (process.env.NODE_ENV === 'production') notFound()
@@ -37,8 +38,8 @@ export default async function LoadingStatesPage({ searchParams }: Props) {
     <main id="main" className="page-x section-y">
       <h1 className="type-h1 text-text">Loading states</h1>
       <p className="type-body-l mt-4 max-w-2xl text-text-muted">
-        Each variant mirrors the page shape it stands in for, so the swap to real content does not
-        jump.
+        Each skeleton mirrors the page shape it stands in for, so the swap to real content does not
+        jump. The branded loader is for routes with no shape of their own.
       </p>
       <ul className="mt-10 flex flex-col gap-3">
         {VARIANTS.map((name) => (

@@ -24,13 +24,15 @@ export const metadata: Metadata = {
   applicationName: SITE.name,
   manifest: '/site.webmanifest',
   icons: {
-    // No favicon.svg: that file only wraps two 1000px PNGs (490 KB), and browsers fetch it
-    // at high priority on every page.
+    // All generated from the logo mark by scripts/generate-icons.mjs. The SVG is 0.5 KB; it
+    // replaced a 490 KB file that only wrapped two PNGs. `?v=2` makes browsers drop the
+    // cached v1 favicon, which they otherwise keep for days. Bump it when the icons change.
     icon: [
-      { url: '/favicon.ico', sizes: '48x48' },
-      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.ico?v=2', sizes: '16x16 32x32 48x48' },
+      { url: '/favicon.svg?v=2', type: 'image/svg+xml', sizes: 'any' },
+      { url: '/favicon-96x96.png?v=2', sizes: '96x96', type: 'image/png' },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: '/apple-touch-icon.png?v=2',
   },
   alternates: {
     types: { 'application/rss+xml': '/rss.xml' },

@@ -208,6 +208,51 @@
   }
 }
 
+/*
+ * Branded route loader (src/components/visuals/BrandLoader.tsx). Same rule as above: it answers
+ * a navigation, and it only appears once a load has taken a moment.
+ *
+ * The Z's base state is fully drawn. The reduced-motion rule cuts animations to one 0.01ms
+ * run with no fill, so those users get a still mark rather than a blank one.
+ */
+@keyframes mark-draw {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  48%,
+  82% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@utility animate-mark-draw {
+  stroke-dasharray: 1;
+  animation: mark-draw 1.9s var(--ease-in-out) infinite;
+}
+
+/* Holds the loader back so a load that finishes quickly never flashes it. */
+@keyframes loader-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@utility animate-loader-in {
+  animation: loader-in 0.2s var(--ease-out) 0.3s both;
+}
+
 /* Scroll-linked progress for the process timeline only (design §6c). */
 @keyframes timeline-fill {
   from {

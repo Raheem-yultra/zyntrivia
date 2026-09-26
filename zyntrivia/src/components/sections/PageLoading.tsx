@@ -1,6 +1,8 @@
 import { RouteProgress, Skeleton, SkeletonText } from '@/components/ui/Skeleton'
+import { BrandLoader } from '@/components/visuals/BrandLoader'
 
-export type LoadingVariant = 'page' | 'index' | 'article' | 'form'
+/** `brand` is the branded loader for routes with no page shape of their own to mirror. */
+export type LoadingVariant = 'page' | 'index' | 'article' | 'form' | 'brand'
 
 type Props = {
   variant?: LoadingVariant
@@ -91,6 +93,23 @@ function Body({ variant }: { variant: LoadingVariant }) {
  * announcing, and empty skeletons can't be mistaken for content if a route ever hangs.
  */
 export function PageLoading({ variant = 'page', label = 'Page' }: Props) {
+  if (variant === 'brand') {
+    return (
+      <main
+        id="main"
+        aria-busy="true"
+        // Same header offsets as the 404 page: the loader sits in the middle of what's left.
+        className="page-x grid min-h-[calc(100dvh-4rem)] place-items-center md:min-h-[calc(100dvh-72px)]"
+      >
+        <RouteProgress />
+        <p role="status" className="sr-only">
+          {label} is loading
+        </p>
+        <BrandLoader />
+      </main>
+    )
+  }
+
   return (
     <main id="main" aria-busy="true" className="page-x">
       <RouteProgress />
