@@ -3,12 +3,12 @@ import { APIError, type CollectionBeforeOperationHook, type CollectionConfig } f
 import { anyone, authenticated } from '../access'
 import { sanitizeSvg } from '../lib/svg'
 
-const sanitizeSvgUpload: CollectionBeforeOperationHook = ({ args, operation }) => {
+const sanitizeSvgUpload: CollectionBeforeOperationHook = async ({ args, operation }) => {
   if (operation !== 'create' && operation !== 'update') return args
   const file = args.req?.file
   if (!file || file.mimetype !== 'image/svg+xml') return args
 
-  const clean = sanitizeSvg(file.data.toString('utf8'))
+  const clean = await sanitizeSvg(file.data.toString('utf8'))
   if (!clean.includes('<svg')) throw new APIError('This SVG could not be sanitized safely.', 400)
 
   file.data = Buffer.from(clean, 'utf8')
