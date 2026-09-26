@@ -239,6 +239,39 @@
   animation: mark-draw 1.9s var(--ease-in-out) infinite;
 }
 
+/*
+ * Page-load splash (src/components/layout/SplashScreen.tsx): the Z draws in over 0.55s, holds,
+ * and the screen fades out from 0.75s to 1.05s, then stops catching clicks.
+ *
+ * With reduced motion the global rule below cuts both animations to 0.01ms but keeps their
+ * delays, so those visitors get a still logo for 0.75s that then disappears without a fade.
+ * That's why the draw-in has no delay: a delay there would blink the Z in after 0.1s.
+ */
+@keyframes mark-draw-in {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@utility animate-mark-draw-in {
+  stroke-dasharray: 1;
+  animation: mark-draw-in 0.55s var(--ease-out) both;
+}
+
+@keyframes splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@utility animate-splash {
+  animation: splash-out 0.3s var(--ease-out) 0.75s both;
+}
+
 /* Holds the loader back so a load that finishes quickly never flashes it. */
 @keyframes loader-in {
   from {

@@ -6,6 +6,7 @@ import { PlausibleScript } from '@/components/analytics/PlausibleScript'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { SkipLink } from '@/components/layout/SkipLink'
+import { SplashScreen } from '@/components/layout/SplashScreen'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getSiteSettings } from '@/lib/cms/globals'
 import { fontVariables } from '@/lib/fonts'
@@ -55,6 +56,7 @@ export default async function FrontendLayout({ children }: { children: ReactNode
   return (
     <html lang="en" className={fontVariables}>
       <body>
+        <SplashScreen />
         <SkipLink />
         <Header />
         {children}

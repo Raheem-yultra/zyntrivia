@@ -11,7 +11,7 @@ export function BrandLoader({ className }: { className?: string }) {
     // Not `data-visual`: that marks a section's page visual (copy-budget test), and a loading
     // indicator isn't one.
     <div aria-hidden data-loader className={cn('animate-loader-in', className)}>
-      <LogoMark animated className="size-16 md:size-20" />
+      <LogoMark animation="loop" className="size-16 md:size-20" />
     </div>
   )
 }
