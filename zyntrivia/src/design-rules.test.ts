@@ -27,6 +27,8 @@ const PALETTE =
   /\b(?:bg|text|border|ring|outline|fill|stroke|from|via|to|shadow|decoration|divide|accent|caret|placeholder)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|black|white)(?:-\d{2,3})?\b/
 const HEX = /#[0-9a-fA-F]{3,8}\b/
 const GRADIENT_TEXT = /\bbg-clip-text\b|\bbg-gradient-to-|\bbg-linear-to-/
+// CLAUDE.md: the site never says where the studio is. Covers pages, components, and seed data.
+const STUDIO_LOCATION = /\b(?:karachi|pakistan|lahore|islamabad|PKT)\b|\bUTC\s*[+−-]\s*\d/i
 
 function sourceFiles(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -62,5 +64,11 @@ describe('design rules', () => {
 
   it('uses no gradient text or gradient utilities', () => {
     expect(offenders(GRADIENT_TEXT)).toEqual([])
+  })
+})
+
+describe('product rules', () => {
+  it('never states where the studio is located', () => {
+    expect(offenders(STUDIO_LOCATION)).toEqual([])
   })
 })

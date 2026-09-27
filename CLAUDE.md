@@ -32,6 +32,7 @@ v1 problem being fixed: too many words, too few visuals, homepage tried to be ev
 ## Non-negotiable product rules
 - **No pricing** anywhere. Primary CTA is always **"Request a quote"** → `/quote`.
 - **No founder name or face.** Studio voice: "we".
+- **No studio location of any kind**: no city, country, or UTC offset in copy, CMS content, seed data, or structured data. State working hours in UTC if needed. Naming the markets we serve ("teams in the US and Europe") is fine.
 - Quote form has **no budget field**.
 - **Only verifiable proof.** No invented client logos, testimonials, metrics, or "trusted by 100+ companies". If real data is missing, render nothing — never a placeholder that could ship.
 - Every homepage section must contain a **visual** (diagram, screenshot, video loop, interactive element). A section that is only text is a bug.

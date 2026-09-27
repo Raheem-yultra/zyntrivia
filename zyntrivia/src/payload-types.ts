@@ -1197,7 +1197,7 @@ export interface SiteSetting {
    */
   responseTime?: string | null;
   /**
-   * e.g. "Karachi (UTC+5), overlapping EU and US Eastern hours"
+   * Internal only: not shown anywhere on the site. The studio does not publish its location.
    */
   location?: string | null;
   social?: {

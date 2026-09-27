@@ -5,11 +5,14 @@ type Band = { label: string; detail: string; start: number; end: number; tone: '
 /**
  * Working-hours overlap in UTC, drawn from the v1 site's stated coverage: the full
  * European working day and the US Eastern morning. Review with the studio before changing.
+ *
+ * Our row gives hours only, never a city, country, or UTC offset: the studio doesn't
+ * publish its location (CLAUDE.md).
  */
 const BANDS: Band[] = [
   { label: 'Europe', detail: '09:00–17:00 CET', start: 8, end: 16, tone: 'info' },
   { label: 'US Eastern', detail: '09:00–17:00 ET', start: 13, end: 21, tone: 'info' },
-  { label: 'Zyntrivia', detail: 'Karachi, UTC+5', start: 8, end: 17, tone: 'accent' },
+  { label: 'Zyntrivia', detail: '08:00–17:00 UTC', start: 8, end: 17, tone: 'accent' },
 ]
 
 export function TimezoneOverlap() {

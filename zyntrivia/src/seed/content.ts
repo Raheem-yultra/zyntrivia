@@ -178,7 +178,7 @@ export const FAQS = [
     question: 'How do you work with teams in the US and Europe?',
     answer: doc(
       p(
-        'We work from Karachi, and our hours overlap the European working day and the US East Coast morning. You see real progress every week and get replies within one business day.',
+        'Our hours overlap the European working day and the US East Coast morning. You see real progress every week and get replies within one business day.',
       ),
     ),
   },
@@ -775,7 +775,6 @@ export const HOMEPAGE = {
 export const SITE_SETTINGS = {
   contactEmail: 'hello@zyntrivia.com',
   responseTime: 'Replies within one business day',
-  location: 'Karachi (UTC+5), overlapping EU and US Eastern hours',
   social: {
     linkedinUrl: 'https://www.linkedin.com/company/zyntrivia',
     githubUrl: null,

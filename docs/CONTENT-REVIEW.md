@@ -21,7 +21,7 @@ Most items are CMS content. Change them in the admin (see `docs/EDITING-GUIDE.md
 
 | # | Item | Where | Notes | Decision |
 |---|---|---|---|---|
-| 2.1 | Location "Karachi (UTC+5)" and the working-hours overlap chart (09:00–17:00 CET and ET against Karachi hours) | /about, Site settings, FAQ "How do you work with teams in the US and Europe?" | From v1. Check the hours we actually commit to. The chart is **code** (`TimezoneOverlap.tsx`). | ☐ keep ☐ change |
+| 2.1 | Studio location | /about, Site settings, FAQ "How do you work with teams in the US and Europe?" | **Decided 2026-09-27: the site never states where the studio is** (no city, country, or UTC offset). The /about copy and the working-hours chart (**code**, `TimezoneOverlap.tsx`) now give our hours in UTC only, and the Site settings location field isn't shown anywhere. Still check that 08:00–17:00 UTC is the coverage we commit to. | ☑ change |
 | 2.2 | "A small studio that builds software to last" | /about headline (**code**) | Written for v2 | ☐ keep ☐ change |
 | 2.3 | About mission and principles copy | /about (**code**) | Written for v2, 80-word budget | ☐ keep ☐ change |
 | 2.4 | Contact email `hello@zyntrivia.com` | Site settings, footer, emails | Confirm the inbox exists and is monitored | ☐ confirmed |
@@ -84,7 +84,7 @@ Nine FAQs are seeded and six show on the homepage: time zones, who owns what we 
 |---|---|---|---|
 | 8.1 | /privacy | Covers quote data, the processors (Vercel, Supabase, Resend, Cloudflare, Plausible), hashed IPs for rate limiting, retention, and rights. **Not reviewed by a lawyer.** Name the legal entity and add a postal address if required for EU clients. | ☐ |
 | 8.2 | /terms | Website terms plus an "Engagements" clause: client work is governed by the agreement sent with each quote, and IP in custom work is assigned to the client on payment. Not a services agreement. **Not reviewed by a lawyer.** | ☐ |
-| 8.3 | Data location | /privacy doesn't say where data is stored. Add the Supabase region once it's chosen (see `docs/LAUNCH-CHECKLIST.md`). | ☐ |
+| 8.3 | Data location | /privacy doesn't say where data is stored. The studio doesn't publish its own location (2.1), but where visitor data is stored is a separate question: privacy law, GDPR in particular, may require naming the country when data leaves the EU. The database is in Supabase's `ap-northeast-1` (Tokyo) region. Decide with a lawyer before launch. | ☐ |
 
 ## How the site protects these rules automatically
 

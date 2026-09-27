@@ -120,8 +120,8 @@ export default function AboutPage() {
               Remote, with real overlap
             </h2>
             <p className="type-body-l mt-4 text-text-muted">
-              We work from Karachi (UTC+5). Our day covers the European working day and the US
-              Eastern morning, with replies within one business day.
+              Our day covers the European working day and the US Eastern morning, with replies
+              within one business day.
             </p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">

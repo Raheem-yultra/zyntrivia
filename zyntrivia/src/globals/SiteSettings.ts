@@ -49,7 +49,10 @@ export const SiteSettings: GlobalConfig = {
     {
       name: 'location',
       type: 'text',
-      admin: { description: 'e.g. "Karachi (UTC+5), overlapping EU and US Eastern hours"' },
+      admin: {
+        description:
+          'Internal only: not shown anywhere on the site. The studio does not publish its location.',
+      },
     },
     {
       name: 'social',

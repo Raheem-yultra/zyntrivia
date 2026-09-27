@@ -172,7 +172,8 @@ Case studies and blog posts don’t appear on the homepage; they have their own 
 
 **Admin → Site settings**
 
-- Contact email, response time ("Replies within one business day"), and location.
+- Contact email and response time ("Replies within one business day").
+- **Location** is internal only and isn't shown anywhere on the site. Don't mention where the studio is in any page, post, FAQ, or case study: no city, country, or time-zone offset.
 - LinkedIn and GitHub links. Add the **GitHub username** to show the public contribution graph on the homepage.
 - **Review**: fill in platform, rating, count, and link **only for a real, public review profile**. If any of these are empty, no rating is shown anywhere.
 
