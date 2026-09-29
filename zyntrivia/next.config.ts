@@ -97,7 +97,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/projects/stocksense-demo/:path*',
-        headers: [{ key: 'Content-Security-Policy', value: DEMO_CSP }],
+        headers: [
+          { key: 'Content-Security-Policy', value: DEMO_CSP },
+          // An empty SPA shell with no description; the case study is the page to rank.
+          // A header, not a meta tag, so rebuilding the demo can't drop it.
+          { key: 'X-Robots-Tag', value: 'noindex' },
+        ],
       },
       { source: '/admin', headers: [{ key: 'Content-Security-Policy', value: ADMIN_CSP }] },
       { source: '/admin/:path*', headers: [{ key: 'Content-Security-Policy', value: ADMIN_CSP }] },

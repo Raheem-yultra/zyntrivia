@@ -25,6 +25,22 @@ describe('buildMetadata', () => {
     })
     expect(metadata.alternates?.canonical).toBe('https://example.com/original')
   })
+
+  it('uses a separate social title for cards and the OG image', () => {
+    const metadata = buildMetadata({
+      title: 'Zyntrivia — What we do',
+      absoluteTitle: true,
+      socialTitle: 'The hook',
+      description: 'x',
+      path: '/',
+    })
+    expect(metadata.title).toEqual({ absolute: 'Zyntrivia — What we do' })
+    expect(metadata.openGraph?.title).toBe('The hook')
+    expect(metadata.openGraph).toMatchObject({ locale: 'en_US' })
+    expect(metadata.twitter).toMatchObject({ title: 'The hook', description: 'x' })
+    const [image] = metadata.openGraph?.images as Array<{ url: string }>
+    expect(new URL(image?.url ?? '').searchParams.get('title')).toBe('The hook')
+  })
 })
 
 describe('breadcrumbJsonLd', () => {

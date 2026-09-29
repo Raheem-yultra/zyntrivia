@@ -40,6 +40,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...posts
       .filter((post) => !post.noindex)
       .map((post) => ({ url: absoluteUrl(`/blog/${post.slug}`), lastModified: post.updatedAt })),
-    ...topics.map((topic) => ({ url: absoluteUrl(`/blog/topic/${topic.slug}`) })),
+    ...topics
+      .filter((topic) => posts.some((post) => post.topicIds.includes(topic.id)))
+      .map((topic) => ({ url: absoluteUrl(`/blog/topic/${topic.slug}`) })),
   ]
 }

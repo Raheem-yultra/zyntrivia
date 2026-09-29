@@ -8,6 +8,10 @@ import { SITE, absoluteUrl } from './site'
 
 type MetadataInput = {
   title: string
+  /** Skip the "%s — Zyntrivia" template (the title already names the studio). */
+  absoluteTitle?: boolean
+  /** Title for social cards and the OG image when it should differ from the search title. */
+  socialTitle?: string
   description: string
   path: string
   /** Short label above the title on the generated OG image. */
@@ -23,9 +27,10 @@ type MetadataInput = {
 /** Per-route metadata. The root layout applies the "%s — Zyntrivia" title template. */
 export function buildMetadata(input: MetadataInput): Metadata {
   const url = absoluteUrl(input.path)
-  const image = input.image ?? ogImageUrl(input.title, input.ogEyebrow)
+  const socialTitle = input.socialTitle ?? input.title
+  const image = input.image ?? ogImageUrl(socialTitle, input.ogEyebrow)
   return {
-    title: input.title,
+    title: input.absoluteTitle ? { absolute: input.title } : input.title,
     description: input.description,
     alternates: { canonical: input.canonical || url },
     robots: input.noindex ? { index: false, follow: true } : undefined,
@@ -33,9 +38,10 @@ export function buildMetadata(input: MetadataInput): Metadata {
       type: input.type ?? 'website',
       url,
       siteName: SITE.name,
-      title: input.title,
+      locale: SITE.locale,
+      title: socialTitle,
       description: input.description,
-      images: [{ url: image, width: 1200, height: 630, alt: input.title }],
+      images: [{ url: image, width: 1200, height: 630, alt: socialTitle }],
       ...(input.type === 'article'
         ? {
             publishedTime: input.publishedTime ?? undefined,
@@ -45,7 +51,7 @@ export function buildMetadata(input: MetadataInput): Metadata {
     },
     twitter: {
       card: 'summary_large_image',
-      title: input.title,
+      title: socialTitle,
       description: input.description,
       images: [image],
     },
@@ -63,9 +69,17 @@ export function organizationJsonLd(settings: { email: string; sameAs: string[] }
     '@id': ORGANIZATION_ID,
     name: SITE.name,
     url: SITE.url,
+    description: SITE.description,
     logo: absoluteUrl('/web-app-manifest-512x512.png'),
     email: settings.email,
-    sameAs: settings.sameAs,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: settings.email,
+      url: absoluteUrl('/quote'),
+      availableLanguage: 'English',
+    },
+    sameAs: settings.sameAs.length > 0 ? settings.sameAs : undefined,
   }
 }
 
@@ -73,8 +87,11 @@ export function websiteJsonLd(): JsonLd {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
     name: SITE.name,
     url: SITE.url,
+    description: SITE.description,
+    inLanguage: 'en',
     publisher: { '@id': ORGANIZATION_ID },
   }
 }
@@ -90,7 +107,8 @@ export function articleJsonLd(post: Post): JsonLd {
     dateModified: post.updatedAt,
     author: { '@type': 'Organization', name: post.author || `${SITE.name} team`, url: SITE.url },
     publisher: { '@id': ORGANIZATION_ID },
-    image: ogImageUrl(post.title, 'Blog'),
+    inLanguage: 'en',
+    image: ogImageUrl(post.seo?.metaTitle || post.title, 'Blog'),
     mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
   }
 }
@@ -103,6 +121,8 @@ export function creativeWorkJsonLd(study: CaseStudy): JsonLd {
     abstract: study.summary,
     url: absoluteUrl(`/work/${study.slug}`),
     creator: { '@id': ORGANIZATION_ID },
+    image: ogImageUrl(study.seo?.metaTitle || `${study.title} case study`, 'Case study'),
+    datePublished: study.createdAt,
     dateModified: study.updatedAt,
     keywords: (study.stack ?? []).map((item) => item.name).join(', ') || undefined,
   }

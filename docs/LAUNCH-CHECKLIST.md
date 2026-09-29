@@ -128,7 +128,8 @@ Do this on a preview deployment of `redesign/v2` connected to the **production**
       runs and Next can no longer change the status. Next marks these responses
       `<meta name="robots" content="noindex">`, which is also true of unknown `/work`,
       `/blog`, and `/services` slugs.
-- [ ] `/robots.txt` lists the production sitemap URL.
+- [ ] `/robots.txt` on a **preview** deploy is `Disallow: /`, and its pages carry
+      `<meta name="robots" content="noindex, nofollow">`. Only `VERCEL_ENV=production` is indexable.
 
 ## 7. Go live
 
@@ -137,10 +138,14 @@ Do this on a preview deployment of `redesign/v2` connected to the **production**
 - [ ] Check v1 URLs still resolve: `/work`, `/work/stocksense`, `/services`, `/process`, `/about`, `/quote`, `/privacy`, `/terms`, `/projects/stocksense-demo`. `/studio` redirects to `/admin`, and `/home` to `/`.
 - [ ] Response headers on `/` include `Content-Security-Policy` and `Strict-Transport-Security`.
 - [ ] Plausible shows live visitors, and a test `cta_click` appears.
+- [ ] `/robots.txt` lists the production sitemap URL and allows `/api/og` (social crawlers skip card images that robots.txt blocks).
+- [ ] Link previews: paste `/`, a case study, and a blog post into [opengraph.xyz](https://www.opengraph.xyz), LinkedIn Post Inspector, and a Slack DM. Each shows the branded 1200×630 card, title, and description.
+- [ ] Rich results: run `/`, a service page, and a blog post through Google's [Rich Results Test](https://search.google.com/test/rich-results). FAQ, breadcrumb, and article markup validate with no errors.
 
 ## 8. After launch
 
 - [ ] **Google Search Console**: verify `zyntrivia.com` with a DNS record, submit `https://zyntrivia.com/sitemap.xml`, and request indexing for `/`.
+- [ ] **Bing Webmaster Tools**: import the site from Search Console (covers Bing, DuckDuckGo, and ChatGPT search).
 - [ ] **Uptime monitoring** (Better Stack, UptimeRobot, or similar): check `https://zyntrivia.com/` and `https://zyntrivia.com/quote` every 5 minutes, and alert the studio inbox.
 - [ ] Remove the v1 Sanity project once nothing references it.
 - [ ] One week after launch, review the Plausible funnel against the goals and metrics in `docs/01-PRD.md` §1.

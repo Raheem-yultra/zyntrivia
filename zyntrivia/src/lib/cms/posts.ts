@@ -114,6 +114,7 @@ export const getRelatedPosts = unstable_cache(
 
 export type PostIndexEntry = Pick<Post, 'slug' | 'updatedAt' | 'publishedAt'> & {
   noindex: boolean
+  topicIds: number[]
 }
 
 export const getPostIndex = unstable_cache(
@@ -125,13 +126,14 @@ export const getPostIndex = unstable_cache(
       sort: '-publishedAt',
       pagination: false,
       depth: 0,
-      select: { slug: true, updatedAt: true, publishedAt: true, seo: true },
+      select: { slug: true, updatedAt: true, publishedAt: true, seo: true, topics: true },
     })
     return result.docs.map((doc) => ({
       slug: doc.slug,
       updatedAt: doc.updatedAt,
       publishedAt: doc.publishedAt,
       noindex: Boolean(doc.seo?.noindex),
+      topicIds: (doc.topics ?? []).map((topic) => (typeof topic === 'number' ? topic : topic.id)),
     }))
   },
   ['posts:index'],

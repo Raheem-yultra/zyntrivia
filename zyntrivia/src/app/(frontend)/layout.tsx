@@ -11,7 +11,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { getSiteSettings } from '@/lib/cms/globals'
 import { fontVariables } from '@/lib/fonts'
 import { organizationJsonLd, websiteJsonLd } from '@/lib/seo'
-import { SITE, SITE_URL, THEME_COLOR } from '@/lib/site'
+import { INDEXABLE, SITE, SITE_URL, THEME_COLOR } from '@/lib/site'
 
 import './globals.css'
 
@@ -23,6 +23,14 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   applicationName: SITE.name,
+  publisher: SITE.name,
+  robots: INDEXABLE ? undefined : { index: false, follow: false },
+  // Defaults for pages without their own (404, thanks). buildMetadata replaces them per route.
+  openGraph: { type: 'website', siteName: SITE.name, locale: SITE.locale },
+  twitter: { card: 'summary_large_image' },
+  // Stops iOS turning "30-minute" or dates into tappable phone numbers.
+  formatDetection: { telephone: false, address: false, email: false },
+  appleWebApp: { title: SITE.name, statusBarStyle: 'black-translucent' },
   manifest: '/site.webmanifest',
   icons: {
     // All generated from the logo mark by scripts/generate-icons.mjs. The SVG is 0.5 KB; it

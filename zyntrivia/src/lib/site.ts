@@ -8,9 +8,17 @@ export const SITE = {
   url: SITE_URL,
   description:
     'We build custom web apps, internal tools, and AI automations for growing businesses in the US and Europe.',
+  locale: 'en_US',
   // Fallbacks when SiteSettings hasn't been filled in yet. Real values live in the CMS.
   email: 'hello@zyntrivia.com',
 } as const
+
+/**
+ * Only the production deployment may be indexed. Vercel preview and development deploys
+ * serve the same content on other hosts, so they answer noindex and a closed robots.txt.
+ * Outside Vercel (local dev, CI) this is true so the real production tags can be checked.
+ */
+export const INDEXABLE = !process.env.VERCEL_ENV || process.env.VERCEL_ENV === 'production'
 
 /**
  * Browser chrome colour, matching `--color-bg`. Raw hex because `themeColor` metadata is
