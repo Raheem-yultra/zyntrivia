@@ -21,7 +21,7 @@ Most items are CMS content. Change them in the admin (see `docs/EDITING-GUIDE.md
 
 | # | Item | Where | Notes | Decision |
 |---|---|---|---|---|
-| 2.1 | Studio location | /about, Site settings, FAQ "How do you work with teams in the US and Europe?" | **Decided 2026-09-27: the site never states where the studio is** (no city, country, or UTC offset). The /about copy and the working-hours chart (**code**, `TimezoneOverlap.tsx`) now give our hours in UTC only, and the Site settings location field isn't shown anywhere. Still check that 08:00–17:00 UTC is the coverage we commit to. | ☑ change |
+| 2.1 | Studio location | /about, Site settings | **Decided 2026-09-27: the site never states where the studio is** (no city, country, or UTC offset). The FAQ "How do you work with teams in the US and Europe?" was removed on 2026-09-29; delete it in production /admin too. The /about copy and the working-hours chart (**code**, `TimezoneOverlap.tsx`) now give our hours in UTC only, and the Site settings location field isn't shown anywhere. Still check that 08:00–17:00 UTC is the coverage we commit to. | ☑ change |
 | 2.2 | "A small studio that builds software to last" | /about headline (**code**) | Written for v2 | ☐ keep ☐ change |
 | 2.3 | About mission and principles copy | /about (**code**) | Written for v2, 80-word budget | ☐ keep ☐ change |
 | 2.4 | Contact email `hello@zyntrivia.com` | Site settings, footer, emails | Confirm the inbox exists and is monitored | ☐ confirmed |

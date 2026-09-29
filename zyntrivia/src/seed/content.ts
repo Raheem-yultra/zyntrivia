@@ -171,18 +171,6 @@ export const SERVICES = [
 
 export const FAQS = [
   {
-    key: 'time-zones',
-    order: 1,
-    showOnHome: true,
-    category: 'communication',
-    question: 'How do you work with teams in the US and Europe?',
-    answer: doc(
-      p(
-        'Our hours overlap the European working day and the US East Coast morning. You see real progress every week and get replies within one business day.',
-      ),
-    ),
-  },
-  {
     key: 'who-owns-the-code',
     order: 2,
     showOnHome: true,
